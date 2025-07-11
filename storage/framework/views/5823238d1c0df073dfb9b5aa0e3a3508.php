@@ -15,7 +15,9 @@
 
 <?php $__env->startPush('scripts'); ?>
     <!-- CDN con CKEditor 5 completo y gratuito -->
-    <script src="https://cdn.jsdelivr.net/npm/ckeditor5-full-free-plugin@23.1.2/build/ckeditor.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/ckeditor5-full-free-plugin@23.1.2/build/ckeditor.min.js"></script> -->
+    <!-- CKEditor 5 Full Free local -->
+    <script src="<?php echo e(asset('ckeditor5-full/build/ckeditor.min.js')); ?>"></script>
     
     <script>
         document.addEventListener('livewire:init', async function () {

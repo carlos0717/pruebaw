@@ -32,6 +32,7 @@
                     <td class="px-4 py-3 whitespace-normal align-top text-gray-800">{{ $proyecto->estado }}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-center align-top">
                         <div class="flex justify-center gap-2">
+                            <!-- <button wire:click="verDetalle({{ $proyecto->id }})" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800">Ver Detalles</button> -->
                             <button wire:click="openModal('edit', {{ $proyecto->id }})" class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">Editar</button>
                             <button wire:click="confirmDelete({{ $proyecto->id }})" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Eliminar</button>
                         </div>
@@ -57,6 +58,11 @@
     <!-- Modal de registro de estudiante -->
     @if($showEstudianteModal)
         @include('livewire.partials.estudiante-modal')
+    @endif
+
+    <!-- Modal de Detalle de Proyecto (fuera del loop) -->
+    @if(isset($showDetalleModal) && $showDetalleModal && isset($detalleProyecto) && $detalleProyecto)
+        @include('livewire.partials.proyecto-detalle-modal')
     @endif
 
     <!-- Confirm Delete Modal -->

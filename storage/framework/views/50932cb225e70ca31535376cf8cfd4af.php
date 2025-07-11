@@ -1,0 +1,1 @@
+<?php /**PATH C:\xampp\htdocs\sisogrsu1\resources\views/proyectos/detalle.blade.php ENDPATH**/ ?>

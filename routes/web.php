@@ -73,6 +73,7 @@ Route::middleware(['role:Administrador,Encargado de RSU'])->group(function () {
     Route::get('/estudiantes', Estudiantes::class)->name('estudiantes');
     Route::get('/docentes', Docentes::class)->name('docentes');
     Route::get('/proyectos', Proyectos::class)->name('proyectos');
+    Route::get('/proyectos/{id}', [\App\Http\Controllers\ProyectoDetalleController::class, 'show'])->name('proyectos.detalle');
     Route::get('/noticias', Noticias::class)->name('noticias');
     Route::get('/documentos', Documentos::class)->name('documentos');
 });

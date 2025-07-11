@@ -27,7 +27,7 @@ class UserTable extends Component
     protected $rules = [
         'nombres' => 'required|string|max:50|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
         'apellidos' => 'required|string|max:50|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
-        'email' => 'required|email:rfc,dns|max:100',
+        'email' => 'required|email:rfc,dns|max:100', // unique se agrega dinámicamente
         'role_id' => 'required|exists:roles,id',
         'new_password' => 'nullable|min:6',
     ];
@@ -71,9 +71,12 @@ class UserTable extends Component
 
     public function saveUser()
     {
-        if ($this->isEdit) {
+        // Validación única de email
+        if ($this->isEdit && $this->userId) {
+            $this->rules['email'] = 'required|email:rfc,dns|max:100|unique:users,email,' . $this->userId;
             $this->rules['new_password'] = 'nullable|min:6';
         } else {
+            $this->rules['email'] = 'required|email:rfc,dns|max:100|unique:users,email';
             unset($this->rules['new_password']);
         }
         $this->validate($this->rules, $this->messages);
@@ -142,6 +145,7 @@ class UserTable extends Component
         'apellidos.regex' => 'El campo apellidos solo puede contener letras y espacios',
         'email.required' => 'El campo correo electrónico es obligatorio',
         'email.email' => 'El correo electrónico no tiene un formato válido',
+        'email.unique' => 'El correo electrónico ya está registrado, debe ingresar uno diferente',
         'role_id.required' => 'El campo cargo es obligatorio',
         'new_password.min' => 'La contraseña debe tener al menos 6 caracteres',
     ];

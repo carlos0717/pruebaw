@@ -32,6 +32,7 @@
                     <td class="px-4 py-3 whitespace-normal align-top text-gray-800"><?php echo e($proyecto->estado); ?></td>
                     <td class="px-4 py-3 whitespace-nowrap text-center align-top">
                         <div class="flex justify-center gap-2">
+                            <!-- <button wire:click="verDetalle(<?php echo e($proyecto->id); ?>)" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800">Ver Detalles</button> -->
                             <button wire:click="openModal('edit', <?php echo e($proyecto->id); ?>)" class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">Editar</button>
                             <button wire:click="confirmDelete(<?php echo e($proyecto->id); ?>)" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700">Eliminar</button>
                         </div>
@@ -58,6 +59,11 @@
     <!-- Modal de registro de estudiante -->
     <!--[if BLOCK]><![endif]--><?php if($showEstudianteModal): ?>
         <?php echo $__env->make('livewire.partials.estudiante-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+
+    <!-- Modal de Detalle de Proyecto (fuera del loop) -->
+    <!--[if BLOCK]><![endif]--><?php if(isset($showDetalleModal) && $showDetalleModal && isset($detalleProyecto) && $detalleProyecto): ?>
+        <?php echo $__env->make('livewire.partials.proyecto-detalle-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 
     <!-- Confirm Delete Modal -->
