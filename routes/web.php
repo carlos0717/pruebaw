@@ -13,6 +13,9 @@ use App\Models\Noticias as NoticiaModel;
 use App\Http\Controllers\NoticiasUploadController;
 use App\Livewire\Documentos;
 use App\Http\Controllers\ResponsabilidadSocialController;
+
+//controlador noticia imagenes
+use App\Http\Controllers\CkeditorImageUploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,7 +76,6 @@ Route::middleware(['role:Administrador,Encargado de RSU'])->group(function () {
     Route::get('/estudiantes', Estudiantes::class)->name('estudiantes');
     Route::get('/docentes', Docentes::class)->name('docentes');
     Route::get('/proyectos', Proyectos::class)->name('proyectos');
-    Route::get('/proyectos/{id}', [\App\Http\Controllers\ProyectoDetalleController::class, 'show'])->name('proyectos.detalle');
     Route::get('/noticias', Noticias::class)->name('noticias');
     Route::get('/documentos', Documentos::class)->name('documentos');
 });
@@ -115,8 +117,12 @@ Route::get('/noticias/{id}', function($id) {
     }
     return app(\App\Http\Controllers\NoticiaController::class)->show($id);
 })->name('noticias.show');
-Route::post('/noticias/upload', [NoticiasUploadController::class, 'upload'])->name('noticias.upload');
-require __DIR__.'/ckeditor_upload.php';
+
+/* Route::post('/noticias/upload', [NoticiasUploadController::class, 'upload'])->name('noticias.upload');
+require __DIR__.'/ckeditor_upload.php'; */
+Route::post('/ckeditor/upload', [CkeditorImageUploadController::class, 'upload'])
+     ->middleware(['auth', 'verified']) // ¡Importante! Protege la ruta
+     ->name('ckeditor.upload');
 
 Route::get('/documentos', Documentos::class)
 ->name('documentos');
