@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
         foreach ($roles as $rol) {
             $role = \App\Models\Roles::firstOrCreate(['nombre' => $rol['nombre']], $rol);
             $roleIds[$rol['nombre']] = $role->id;
-        }
+        }        
 
         // Verificar y crear usuario administrador
         if (!User::where('email', 'admin@example.com')->exists()) {
@@ -109,5 +109,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DocentesSeeder::class);
         //llamar al seeder de CategoriaDocumento
         $this->call(CategoriaDocumentoSeeder::class);
+        // Seeders para tablas solicitadas
+        $this->call(\Database\Seeders\InstitucionTiposSeeder::class);
+        $this->call(\Database\Seeders\EstadosSeeder::class);
+        $this->call(\Database\Seeders\InstitucionesSeeder::class);
     }
 }

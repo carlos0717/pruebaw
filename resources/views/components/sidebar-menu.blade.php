@@ -103,16 +103,36 @@
         <div class="mb-4">
             <span class="text-xs font-semibold text-blue-200 uppercase pl-2">Gestión Proyección Social</span>
             <ul class="mt-2 space-y-1">
-            <li>
-                <a href="{{ route('noticias.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('noticias.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
-                <span class="material-icons mr-2">article</span> Noticias
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('documentos.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('documentos.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
-                <span class="material-icons mr-2">description</span> Documentos
-                </a>
-            </li>
+                <li>
+                    <a href="{{ route('estados.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('estados.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
+                        <span class="material-icons mr-2">flag</span> Estados
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('institucion-tipos.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('institucion-tipos.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
+                        <span class="material-icons mr-2">category</span> Tipos de Institución
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('instituciones.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('instituciones.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
+                        <span class="material-icons mr-2">business</span> Instituciones
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('convenios.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('convenios.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
+                        <span class="material-icons mr-2">handshake</span> Convenios
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('noticias.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('noticias.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
+                        <span class="material-icons mr-2">article</span> Noticias
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('documentos.gestion') }}" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 {{ request()->routeIs('documentos.gestion') ? 'bg-blue-800 ring-2 ring-blue-400' : '' }}">
+                        <span class="material-icons mr-2">description</span> Documentos
+                    </a>
+                </li>
             </ul>
         </div>
         @endif

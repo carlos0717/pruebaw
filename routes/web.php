@@ -14,6 +14,11 @@ use App\Http\Controllers\NoticiasUploadController;
 use App\Livewire\Documentos;
 use App\Http\Controllers\ResponsabilidadSocialController;
 
+use App\Livewire\InstitucionTipos;
+use App\Livewire\Instituciones;
+use App\Livewire\Convenios;
+use App\Livewire\Estados;
+
 //controlador noticia imagenes
 use App\Http\Controllers\CkeditorImageUploadController;
 /*
@@ -93,6 +98,15 @@ Route::middleware(['role:Administrador,Encargado de SCE'])->group(function () {
 
 // Gestión Proyección Social
 Route::middleware(['role:Administrador,Encargado de PS'])->group(function () {
+    // Gestión de Estados
+    Route::get('/estados-gestion', Estados::class)->name('estados.gestion');
+    // Gestión de Tipos de Institución
+    Route::get('/institucion-tipos-gestion', InstitucionTipos::class)->name('institucion-tipos.gestion');
+    // Gestión de Instituciones
+    Route::get('/instituciones-gestion', Instituciones::class)->name('instituciones.gestion');
+    // Gestión de Convenios
+    Route::get('/convenios-gestion', Convenios::class)->name('convenios.gestion');
+
     Route::get('/noticias-gestion', Noticias::class)->name('noticias.gestion');
     Route::get('/documentos-gestion', Documentos::class)->name('documentos.gestion');
 });

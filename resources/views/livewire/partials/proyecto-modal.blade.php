@@ -58,7 +58,7 @@
                 </div>
                 <div>
                     <label class="block text-gray-700">Beneficiarios Máximo</label>
-                    <input type="number" wire:model.defer="beneficiarios_numero_maximo" min="0" class="w-full border rounded px-3 py-2 mt-1 @error('beneficiarios_numero_maximo') border-red-500 @enderror" placeholder="Ej: 4" />
+                    <input type="number" wire:model.defer="beneficiarios_numero_maximo" min="0" class="w-full border rounded px-3 py-2 mt-1 @error('beneficiarios_numero_maximo') border-red-500 @enderror" placeholder="Ej: 20" />
                     @error('beneficiarios_numero_maximo') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
             </div>
