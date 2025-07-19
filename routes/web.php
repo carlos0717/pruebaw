@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -51,7 +52,6 @@ Route::get('/proyeccion-social', [\App\Http\Controllers\ProyeccionSocialControll
 Route::get('/seguimiento-egresado', [\App\Http\Controllers\SeguimientoEgresadoController::class, 'index'])->name('seguimiento.egresado');
 Route::get('/extension-universitaria', [\App\Http\Controllers\ExtensionUniversitariaController::class, 'index'])->name('extension.universitaria');
 
-
 // Vista informativa de Responsabilidad Social
 // Route::get('/responsabilidad-social', function () {
 //     return view('responsabilidad-social');
@@ -68,9 +68,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/users', 'dashboard.users')->name('users.index');
     Route::view('/roles', 'dashboard.roles')->name('roles.index');
+    Route::view('/direcciones', 'dashboard.direcciones')->name('direcciones.index');
 });
-
-
 
 // Rutas individuales para cada sección de Noticias y Documentos (para el menú lateral)
 

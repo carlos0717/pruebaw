@@ -7,8 +7,7 @@
     <title><?php echo e($title ?? 'SISOGRSU'); ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
-
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>  
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body class="min-h-screen flex flex-col bg-gray-100">
@@ -85,6 +84,7 @@
 <?php endif; ?>
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
 
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\sisogrsu1\resources\views/components/layouts/app.blade.php ENDPATH**/ ?>

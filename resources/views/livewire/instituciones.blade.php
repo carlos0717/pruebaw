@@ -45,5 +45,7 @@
         {{ $instituciones->links() }}
     </div>
     @include('livewire.partials.modal-form-institucion')
-    @include('livewire.partials.confirm-delete-modal')
+    
+    <x-success-modal />
+    <x-confirmation-modal />
 </div>

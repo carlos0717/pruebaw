@@ -29,7 +29,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'direccion_id',
     ];
+    public function direccion()
+    {
+        return $this->belongsTo(Direccion::class, 'direccion_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

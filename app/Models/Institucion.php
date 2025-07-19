@@ -28,7 +28,7 @@ class Institucion extends Model
         return $this->hasMany(Convenio::class, 'institucion_id');
     }
 
-    public function tipo()
+    public function institucionTipo()
     {
         return $this->belongsTo(InstitucionTipo::class, 'institucion_tipo_id');
     }

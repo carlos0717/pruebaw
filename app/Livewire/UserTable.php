@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
 use App\Models\Roles;
+use App\Models\Direccion;
 
 class UserTable extends Component
 {
@@ -21,6 +22,8 @@ class UserTable extends Component
     public $role_id;
     public $new_password;
     public $roles = [];
+    public $direcciones = [];
+    public $direccion_id;
     public $isEdit = false;
     public $confirmingDeleteId;
 
@@ -29,33 +32,41 @@ class UserTable extends Component
         'apellidos' => 'required|string|max:50|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/',
         'email' => 'required|email:rfc,dns|max:100', // unique se agrega dinámicamente
         'role_id' => 'required|exists:roles,id',
+        'direccion_id' => 'required|exists:direcciones,id',
         'new_password' => 'nullable|min:6',
     ];
 
     public function mount()
     {
         $this->roles = Roles::all();
+        $this->direcciones = Direccion::all();
     }
 
     public function render()
     {
-        $users = User::with('role')
+        $users = User::with(['role', 'direccion'])
             ->where(function($q) {
                 $q->where('nombres', 'like', "%{$this->search}%")
                   ->orWhereHas('role', function($qr) {
                       $qr->where('nombre', 'like', "%{$this->search}%");
+                  })
+                  ->orWhereHas('direccion', function($qd) {
+                      $qd->where('nombre', 'like', "%{$this->search}%");
                   });
             })
             ->orderBy('role_id', 'asc')
             ->orderBy('id', 'desc')
             ->paginate(15);
-        return view('livewire.user-table', compact('users'));
+        return view('livewire.user-table', [
+            'users' => $users,
+            'direcciones' => $this->direcciones,
+        ]);
     }
 
     public function openModal($id = null)
     {
         $this->resetValidation();
-        $this->reset(['nombres','apellidos','email','role_id','userId','new_password']);
+        $this->reset(['nombres','apellidos','email','role_id','userId','new_password','direccion_id']);
         $this->isEdit = false;
         if ($id) {
             $user = User::findOrFail($id);
@@ -64,6 +75,7 @@ class UserTable extends Component
             $this->apellidos = $user->apellidos;
             $this->email = $user->email;
             $this->role_id = $user->role_id;
+            $this->direccion_id = $user->direccion_id;
             $this->isEdit = true;
         }
         $this->showModal = true;
@@ -86,6 +98,7 @@ class UserTable extends Component
             $user->apellidos = $this->apellidos;
             $user->email = $this->email;
             $user->role_id = $this->role_id;
+            $user->direccion_id = $this->direccion_id;
             if (!empty($this->new_password)) {
                 $user->password = bcrypt($this->new_password);
             }
@@ -96,6 +109,7 @@ class UserTable extends Component
                 'apellidos' => $this->apellidos,
                 'email' => $this->email,
                 'role_id' => $this->role_id,
+                'direccion_id' => $this->direccion_id,
                 'password' => bcrypt('12345678'), // default password
             ]);
         }
@@ -127,14 +141,14 @@ class UserTable extends Component
     public function closeModal()
     {
         $this->showModal = false;
-        $this->reset(['nombres','apellidos','email','role_id','userId','new_password']);
+        $this->reset(['nombres','apellidos','email','role_id','userId','new_password','direccion_id']);
         $this->resetValidation();
     }
 
     public function closeSuccessModal()
     {
         $this->showSuccessModal = false;
-        $this->reset(['nombres','apellidos','email','role_id','userId','new_password']);
+        $this->reset(['nombres','apellidos','email','role_id','userId','new_password','direccion_id']);
         $this->resetValidation();
     }
 
@@ -147,6 +161,8 @@ class UserTable extends Component
         'email.email' => 'El correo electrónico no tiene un formato válido',
         'email.unique' => 'El correo electrónico ya está registrado, debe ingresar uno diferente',
         'role_id.required' => 'El campo cargo es obligatorio',
+        'direccion_id.required' => 'El campo dirección es obligatorio',
+        'direccion_id.exists' => 'La dirección seleccionada no es válida',
         'new_password.min' => 'La contraseña debe tener al menos 6 caracteres',
     ];
 }

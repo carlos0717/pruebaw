@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent="{{ $documentoId ? 'update' : 'create' }}">
         <div class="mb-4">
             <label class="block">Título</label>
             <input type="text" wire:model.defer="titulo" class="input input-bordered w-full" required />

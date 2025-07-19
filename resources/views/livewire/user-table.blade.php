@@ -13,6 +13,7 @@
                     <th class="py-2 px-4 text-center">Nombre</th>
                     <th class="py-2 px-4 text-center">Correo</th>
                     <th class="py-2 px-4 text-center">Cargo</th>
+                    <th class="py-2 px-4 text-center">Dirección</th>
                     <th class="py-2 px-4 text-center">Acciones</th>
                 </tr>
             </thead>
@@ -22,6 +23,7 @@
                     <td class="px-4 py-3 whitespace-nowrap text-center align-top">{{ $user->nombres }} {{ $user->apellidos }}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-center align-top">{{ $user->email }}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-center align-top">{{ $user->role->nombre ?? '-' }}</td>
+                    <td class="px-4 py-3 whitespace-nowrap text-center align-top">{{ $user->direccion->nombre ?? '-' }}</td>
                     <td class="px-4 py-3 whitespace-nowrap text-center align-top">
                         <div class="flex justify-center gap-2">
                             <button wire:click="openModal({{ $user->id }})" class="bg-yellow-400 text-white px-3 py-1 rounded hover:bg-yellow-500">Editar</button>
@@ -88,6 +90,16 @@
                         @endforeach
                     </select>
                     @error('role_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700">Dirección</label>
+                    <select wire:model.defer="direccion_id" class="w-full border rounded px-3 py-2 mt-1" required>
+                        <option value="">Seleccione una dirección</option>
+                        @foreach($direcciones as $direccion)
+                        <option value="{{ $direccion->id }}">{{ $direccion->nombre }}</option>
+                        @endforeach
+                    </select>
+                    @error('direccion_id') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 @if($isEdit)
                 <div class="mb-4">

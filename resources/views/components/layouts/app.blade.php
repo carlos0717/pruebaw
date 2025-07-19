@@ -7,7 +7,7 @@
     <title>{{ $title ?? 'SISOGRSU' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    @livewireStyles
+    @livewireStyles  
     @stack('styles')
 </head>
 <body class="min-h-screen flex flex-col bg-gray-100">
@@ -44,6 +44,7 @@
     </div>
     <x-footer />
     @livewireScripts
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('scripts')
 </body>
 </html>

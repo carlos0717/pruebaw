@@ -29,6 +29,18 @@ class Proyectos extends Component
     public $confirmingDelete = false;
     public $proyectoToDelete;
     public $ods_search = '';
+    public $showDetalleModal = false;
+    public $detalleProyecto = null;
+    public function verDetalle($id)
+    {
+        $this->detalleProyecto = ProyectoModel::with(['docenteTutor', 'estudiantes', 'objetivos'])->findOrFail($id);
+        $this->showDetalleModal = true;
+    }
+    public function cerrarDetalleModal()
+    {
+        $this->showDetalleModal = false;
+        $this->detalleProyecto = null;
+    }
 
     protected $rules = [
         'titulo' => 'required|string|max:255',
