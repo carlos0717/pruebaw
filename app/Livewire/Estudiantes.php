@@ -109,10 +109,18 @@ class Estudiantes extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->estudianteToDelete = null;
+    }
+
     public function deleteEstudiante()
     {
         EstudianteModel::destroy($this->estudianteToDelete);
         $this->confirmingDelete = false;
+        $this->estudianteToDelete = null;
+        $this->dispatch('show-success-modal', message: 'El estudiante ha sido eliminado correctamente.');
     }
 
     

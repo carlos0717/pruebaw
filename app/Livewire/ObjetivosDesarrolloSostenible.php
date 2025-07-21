@@ -82,9 +82,17 @@ class ObjetivosDesarrolloSostenible extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->objetivoToDelete = null;
+    }
+
     public function deleteObjetivo()
     {
         Objetivos_desarrollo_sostenible::destroy($this->objetivoToDelete);
         $this->confirmingDelete = false;
+        $this->objetivoToDelete = null;
+        $this->dispatch('show-success-modal', message: 'El objetivo ha sido eliminado correctamente.');
     }
 }

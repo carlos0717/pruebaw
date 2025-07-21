@@ -1,5 +1,7 @@
 <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
-    <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 overflow-y-auto max-h-[90vh]">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-2xl p-6 overflow-y-auto max-h-[90vh] relative">
+        <!-- Botón X de cierre -->
+        <button type="button" wire:click="closeModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold focus:outline-none" aria-label="Cerrar">&times;</button>
         <h2 class="text-lg font-bold mb-4">{{ $modalMode === 'create' ? 'Nuevo Convenio' : 'Editar Convenio' }}</h2>
         <form wire:submit.prevent="save">
             <div class="mb-4">

@@ -56,26 +56,18 @@ class NoticiasForm extends Component
         }
         if ($this->modo === 'create') {
             $noticia = Noticias::create($data);
-            $this->dispatch('show-success-modal', [
-                'message' => 'Noticia creada exitosamente.'
-            ]);
-            $this->redirectToListado();
+            session()->flash('success_message', 'Noticia creada exitosamente.');
+            return redirect()->route('noticias');
         } else {
             $noticia = Noticias::findOrFail($this->noticiaId);
             $noticia->update($data);
-            $this->dispatch('show-success-modal', [
-                'message' => 'Noticia actualizada exitosamente.'
-            ]);
-            $this->redirectToListado();
+            session()->flash('success_message', 'Noticia actualizada exitosamente.');
+            return redirect()->route('noticias');
         }
 
     }
 
-    public function redirectToListado()
-    {
-        // Redirige después de un pequeño delay para mostrar el modal de éxito
-        $this->dispatch('redirect-after-success');
-    }
+    // Redirección ahora gestionada por el modal profesional
 
     public function render()
     {

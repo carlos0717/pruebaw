@@ -102,9 +102,17 @@ class Docentes extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->docenteToDelete = null;
+    }
+
     public function deleteDocente()
     {
         Docente::destroy($this->docenteToDelete);
         $this->confirmingDelete = false;
+        $this->docenteToDelete = null;
+        $this->dispatch('show-success-modal', message: 'El docente ha sido eliminado correctamente.');
     }
 }

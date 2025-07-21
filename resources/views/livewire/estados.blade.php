@@ -44,6 +44,7 @@
     <div class="mt-4">
         {{ $estados->links() }}
     </div>
-    @include('livewire.partials.modal-form-estado')
+</code>    @include('livewire.partials.modal-form-estado')
     @include('livewire.partials.confirm-delete-modal')
+    <x-success-modal />
 </div>

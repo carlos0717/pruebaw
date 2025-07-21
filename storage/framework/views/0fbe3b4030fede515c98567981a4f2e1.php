@@ -67,25 +67,26 @@
 <?php $component = $__componentOriginal6475feafa5c7d85d71efc5a48adb5766; ?>
 <?php unset($__componentOriginal6475feafa5c7d85d71efc5a48adb5766); ?>
 <?php endif; ?>
-    <?php if (isset($component)) { $__componentOriginal5b8b2d0f151a30be878e1a760ec3900c = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal5b8b2d0f151a30be878e1a760ec3900c = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.confirmation-modal','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
-<?php $component->withName('confirmation-modal'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
-<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
-<?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal5b8b2d0f151a30be878e1a760ec3900c)): ?>
-<?php $attributes = $__attributesOriginal5b8b2d0f151a30be878e1a760ec3900c; ?>
-<?php unset($__attributesOriginal5b8b2d0f151a30be878e1a760ec3900c); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal5b8b2d0f151a30be878e1a760ec3900c)): ?>
-<?php $component = $__componentOriginal5b8b2d0f151a30be878e1a760ec3900c; ?>
-<?php unset($__componentOriginal5b8b2d0f151a30be878e1a760ec3900c); ?>
-<?php endif; ?>
+
+    <!-- Modal de Confirmación de Eliminación de Institución -->
+    <!--[if BLOCK]><![endif]--><?php if($showDeleteModal): ?>
+        <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
+            <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                <h2 class="text-lg font-bold mb-4">Eliminar Institución</h2>
+                <!--[if BLOCK]><![endif]--><?php if($deleteWarning): ?>
+                    <p class="mb-4 text-red-600 font-semibold"><?php echo e($deleteWarning); ?></p>
+                    <div class="flex justify-end gap-2 mt-4">
+                        <button type="button" wire:click="closeDeleteModal" class="bg-blue-600 text-white px-4 py-2 rounded">Entendido</button>
+                    </div>
+                <?php else: ?>
+                    <p class="mb-4">¿Está seguro que desea eliminar esta institución? Esta acción no se puede deshacer.</p>
+                    <div class="flex justify-end gap-2 mt-4">
+                        <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
+                        <button type="button" wire:click="delete" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    </div>
+                <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+            </div>
+        </div>
+    <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
 </div>
 <?php /**PATH C:\xampp\htdocs\sisogrsu1\resources\views/livewire/instituciones.blade.php ENDPATH**/ ?>

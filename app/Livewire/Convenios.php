@@ -13,6 +13,52 @@ use Illuminate\Support\Facades\Storage;
 
 class Convenios extends Component
 {
+    public $showTotalsModal = false;
+    public $totalsData = [];
+
+    /**
+     * Calcula los totales de convenios por tipo de institución y estado.
+     */
+    public function showTotals()
+    {
+        // Obtener todos los tipos de institución con convenios
+        $tipos = InstitucionTipo::with(['instituciones.convenios.estado'])->get();
+        $estados = ['Caducado', 'En proceso', 'Vigente'];
+        $data = [];
+        $totalPorEstado = ['Caducado' => 0, 'En proceso' => 0, 'Vigente' => 0];
+        $totalGeneral = 0;
+
+        foreach ($tipos as $tipo) {
+            $row = ['entidad' => $tipo->nombre];
+            $rowTotal = 0;
+            foreach ($estados as $estado) {
+                $count = 0;
+                foreach ($tipo->instituciones as $inst) {
+                    $count += $inst->convenios()->whereHas('estado', function($q) use ($estado) {
+                        $q->where('nombre', $estado);
+                    })->count();
+                }
+                $row[$estado] = $count;
+                $rowTotal += $count;
+                $totalPorEstado[$estado] += $count;
+            }
+            $row['total'] = $rowTotal;
+            $totalGeneral += $rowTotal;
+            $data[] = $row;
+        }
+        $this->totalsData = [
+            'rows' => $data,
+            'totalPorEstado' => $totalPorEstado,
+            'totalGeneral' => $totalGeneral
+        ];
+        $this->showTotalsModal = true;
+    }
+
+    public function closeTotalsModal()
+    {
+        $this->showTotalsModal = false;
+        $this->totalsData = [];
+    }
     use WithPagination, WithFileUploads;
 
     // Propiedades del componente
@@ -21,13 +67,14 @@ class Convenios extends Component
     public $modalMode = 'create';
     public $convenioId;
     public $nombre, $descripcion, $institucion_id, $estado_id, $fecha_inicio, $fecha_fin, $documento_nombre;
-    // public $activo = 1; // PROPIEDAD ELIMINADA
     public $documento_escaneado;
     public $documento_escaneado_path;
     public $showInstitucionModal = false;
     public $institucion_search = '';
     public $newInstitucion = [];
     public $tiposInstitucion;
+    public $showDeleteModal = false;
+    public $convenioToDelete = null;
 
     /**
      * Reglas de validación condicionales.
@@ -176,25 +223,28 @@ class Convenios extends Component
         $this->dispatch('show-success-modal', message: 'Institución creada y seleccionada.');
     }
     
+
     public function confirmDelete($id)
     {
-        $this->convenioId = $id;
-        $this->dispatch('show-confirmation-modal', [
-            'title' => 'Eliminar Convenio',
-            'message' => '¿Estás seguro de que deseas eliminar este convenio? Esta acción no se puede deshacer.',
-            'confirmButtonText' => 'Sí, Eliminar',
-            'cancelButtonText' => 'No, Cancelar',
-            'confirmMethod' => 'delete'
-        ]);
+        $this->convenioToDelete = $id;
+        $this->showDeleteModal = true;
     }
 
-    public function delete()
+    public function closeDeleteModal()
     {
-        $convenio = Convenio::findOrFail($this->convenioId);
+        $this->showDeleteModal = false;
+        $this->convenioToDelete = null;
+    }
+
+    public function deleteConvenio()
+    {
+        $convenio = Convenio::findOrFail($this->convenioToDelete);
         if ($convenio->documento_escaneado_path) {
             Storage::disk('public')->delete($convenio->documento_escaneado_path);
         }
         $convenio->delete();
+        $this->showDeleteModal = false;
+        $this->convenioToDelete = null;
         $this->dispatch('show-success-modal', message: 'Convenio eliminado con éxito.');
     }
         

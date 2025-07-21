@@ -72,13 +72,13 @@
                 <h2 class="text-lg font-bold mb-4">Eliminar Proyecto</h2>
                 <p class="mb-4">¿Está seguro que desea eliminar este proyecto?</p>
                 <div class="flex justify-end gap-2 mt-4">
-                    <button wire:click="$set('confirmingDelete', false)" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
-                    <button wire:click="deleteProyecto" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
+                    <button type="button" wire:click="deleteProyecto" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
                 </div>
             </div>
         </div>
     @endif
 
-    <!-- Modal de éxito con Alpine.js -->
-    <x-exito-modal message="" />
+    <!-- Modal de éxito profesional -->
+    <x-success-modal message="Los cambios se han guardado correctamente." />
 </div>

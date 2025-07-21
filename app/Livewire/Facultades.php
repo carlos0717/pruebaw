@@ -78,9 +78,17 @@ class Facultades extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->facultadToDelete = null;
+    }
+
     public function deleteFacultad()
     {
         FacultadModel::destroy($this->facultadToDelete);
         $this->confirmingDelete = false;
+        $this->facultadToDelete = null;
+        $this->dispatch('show-success-modal', message: 'La facultad ha sido eliminada correctamente.');
     }
 }

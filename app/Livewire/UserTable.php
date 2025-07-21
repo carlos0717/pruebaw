@@ -83,15 +83,22 @@ class UserTable extends Component
 
     public function saveUser()
     {
-        // Validación única de email
+        // Validación profesional de email
+        $emailRule = 'required|string|email|max:100|unique:users,email';
         if ($this->isEdit && $this->userId) {
-            $this->rules['email'] = 'required|email:rfc,dns|max:100|unique:users,email,' . $this->userId;
-            $this->rules['new_password'] = 'nullable|min:6';
-        } else {
-            $this->rules['email'] = 'required|email:rfc,dns|max:100|unique:users,email';
-            unset($this->rules['new_password']);
+            $emailRule .= ',' . $this->userId;
         }
-        $this->validate($this->rules, $this->messages);
+        $rules = [
+            'nombres' => $this->rules['nombres'],
+            'apellidos' => $this->rules['apellidos'],
+            'email' => $emailRule,
+            'role_id' => $this->rules['role_id'],
+            'direccion_id' => $this->rules['direccion_id'],
+        ];
+        if ($this->isEdit && $this->userId) {
+            $rules['new_password'] = $this->rules['new_password'];
+        }
+        $this->validate($rules, $this->messages);
         if ($this->userId) {
             $user = User::findOrFail($this->userId);
             $user->nombres = $this->nombres;
@@ -103,6 +110,7 @@ class UserTable extends Component
                 $user->password = bcrypt($this->new_password);
             }
             $user->save();
+            $this->dispatch('show-success-modal', message: 'El usuario ha sido actualizado correctamente.');
         } else {
             User::create([
                 'nombres' => $this->nombres,
@@ -112,14 +120,11 @@ class UserTable extends Component
                 'direccion_id' => $this->direccion_id,
                 'password' => bcrypt('12345678'), // default password
             ]);
-        }
-        $this->showModal = false;
-        if ($this->isEdit) {
-            $this->dispatch('show-success-modal', message: 'El usuario ha sido actualizado correctamente.');
-        } else {
             $this->dispatch('show-success-modal', message: 'El usuario ha sido creado correctamente.');
         }
+        $this->showModal = false;
     }
+
 
     public function confirmDelete($id)
     {
@@ -127,10 +132,18 @@ class UserTable extends Component
         $this->showDeleteModal = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->showDeleteModal = false;
+        $this->confirmingDeleteId = null;
+    }
+
     public function deleteUser()
     {
         User::findOrFail($this->confirmingDeleteId)->delete();
         $this->showDeleteModal = false;
+        $this->confirmingDeleteId = null;
+        $this->dispatch('show-success-modal', message: 'El usuario ha sido eliminado correctamente.');
     }
 
     public function updatingSearch()

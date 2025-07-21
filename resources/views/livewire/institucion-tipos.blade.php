@@ -40,6 +40,7 @@
     <div class="mt-4">
         {{ $tipos->links() }}
     </div>
-    @include('livewire.partials.modal-form-tipo')
+</code>    @include('livewire.partials.modal-form-tipo')
     @include('livewire.partials.confirm-delete-modal')
+    <x-success-modal />
 </div>

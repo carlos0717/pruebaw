@@ -95,9 +95,17 @@ class Noticias extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->noticiaToDelete = null;
+    }
+
     public function deleteNoticia()
     {
         NoticiaModel::destroy($this->noticiaToDelete);
         $this->confirmingDelete = false;
+        $this->noticiaToDelete = null;
+        $this->dispatch('show-success-modal', message: 'La noticia ha sido eliminada correctamente.');
     }
 }

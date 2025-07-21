@@ -18,6 +18,8 @@ class Instituciones extends Component
     public $institucion_tipo_id;
     public $descripcion;
     public $activo = 1;
+    public $showDeleteModal = false;
+    public $deleteWarning = '';
 
     protected $rules = [
         'nombre' => 'required|string|max:100|unique:instituciones,nombre',
@@ -107,20 +109,30 @@ class Instituciones extends Component
         $this->closeModal();
     }
 
+
     public function confirmDelete($id)
     {
         $this->institucionId = $id;
-        if (\App\Models\Institucion::find($id)) {
-            $this->dispatch('show-confirmation-modal', [
-                'title' => 'Eliminar Institución',
-                'message' => '¿Estás seguro de que deseas eliminar esta institución? Esta acción no se puede deshacer.',
-                'confirmButtonText' => 'Sí, Eliminar',
-                'cancelButtonText' => 'No, Cancelar',
-                'confirmMethod' => 'delete'
-            ]);
+        $institucion = \App\Models\Institucion::find($id);
+        if ($institucion) {
+            $conveniosCount = $institucion->convenios()->count();
+            if ($conveniosCount > 0) {
+                $this->deleteWarning = 'Esta institución está relacionada con ' . $conveniosCount . ' convenio(s). Para eliminarla, primero debe desvincularla de todos los convenios.';
+                $this->showDeleteModal = true;
+            } else {
+                $this->deleteWarning = '';
+                $this->showDeleteModal = true;
+            }
         } else {
             $this->dispatch('show-success-modal', message: 'No se encontró la institución para eliminar.');
         }
+    }
+
+    public function closeDeleteModal()
+    {
+        $this->showDeleteModal = false;
+        $this->deleteWarning = '';
+        $this->institucionId = null;
     }
 
     public function delete()
@@ -128,7 +140,9 @@ class Instituciones extends Component
         $institucion = \App\Models\Institucion::find($this->institucionId);
         if ($institucion) {
             if ($institucion->convenios()->count() > 0) {
-                $this->dispatch('show-success-modal', message: 'No se puede eliminar la institución porque tiene convenios relacionados.');
+                // No eliminar, solo cerrar modal (la advertencia ya fue mostrada)
+                $this->closeDeleteModal();
+                return;
             } else {
                 $institucion->delete();
                 $this->dispatch('show-success-modal', message: 'Institución eliminada correctamente.');
@@ -136,7 +150,7 @@ class Instituciones extends Component
         } else {
             $this->dispatch('show-success-modal', message: 'No se encontró la institución para eliminar.');
         }
-        $this->closeModal();
+        $this->closeDeleteModal();
     }
 
     public function updatingSearch()

@@ -77,14 +77,14 @@ class InstitucionTipos extends Component
                 'nombre' => $this->nombre,
                 'descripcion' => $this->descripcion,
             ]);
-            session()->flash('success_message', 'Tipo de institución creado correctamente.');
+            $this->dispatch('show-success-modal', message: 'Tipo de institución creado correctamente.');
         } else {
             $tipo = InstitucionTipo::findOrFail($this->tipoId);
             $tipo->update([
                 'nombre' => $this->nombre,
                 'descripcion' => $this->descripcion,
             ]);
-            session()->flash('success_message', 'Tipo de institución actualizado correctamente.');
+            $this->dispatch('show-success-modal', message: 'Tipo de institución actualizado correctamente.');
         }
         $this->closeModal();
     }
@@ -100,7 +100,7 @@ class InstitucionTipos extends Component
         $tipo = InstitucionTipo::findOrFail($this->tipoId);
         $tipo->delete();
         $this->confirmingDelete = false;
-        session()->flash('success_message', 'Tipo de institución eliminado correctamente.');
+        $this->dispatch('show-success-modal', message: 'Tipo de institución eliminado correctamente.');
     }
 
     public function updatingSearch()

@@ -151,10 +151,18 @@ class Proyectos extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->proyectoToDelete = null;
+    }
+
     public function deleteProyecto()
     {
         ProyectoModel::destroy($this->proyectoToDelete);
         $this->confirmingDelete = false;
+        $this->proyectoToDelete = null;
+        $this->dispatch('show-success-modal', message: 'El proyecto ha sido eliminado correctamente.');
     }
 
     // Métodos para búsqueda y registro de estudiantes/docentes/ods

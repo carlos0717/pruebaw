@@ -47,5 +47,25 @@
     @include('livewire.partials.modal-form-institucion')
     
     <x-success-modal />
-    <x-confirmation-modal />
+
+    <!-- Modal de Confirmación de Eliminación de Institución -->
+    @if($showDeleteModal)
+        <div class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-40">
+            <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
+                <h2 class="text-lg font-bold mb-4">Eliminar Institución</h2>
+                @if($deleteWarning)
+                    <p class="mb-4 text-red-600 font-semibold">{{ $deleteWarning }}</p>
+                    <div class="flex justify-end gap-2 mt-4">
+                        <button type="button" wire:click="closeDeleteModal" class="bg-blue-600 text-white px-4 py-2 rounded">Entendido</button>
+                    </div>
+                @else
+                    <p class="mb-4">¿Está seguro que desea eliminar esta institución? Esta acción no se puede deshacer.</p>
+                    <div class="flex justify-end gap-2 mt-4">
+                        <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
+                        <button type="button" wire:click="delete" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    </div>
+                @endif
+            </div>
+        </div>
+    @endif
 </div>

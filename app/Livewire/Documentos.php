@@ -77,10 +77,16 @@ class Documentos extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+    }
+
     public function deleteDocumento()
     {
         DocumentosModel::destroy($this->documentoToDelete);
         $this->confirmingDelete = false;
+        $this->dispatch('show-success-modal', ['message' => 'Documento eliminado correctamente.']);
     }
 
     public function create()

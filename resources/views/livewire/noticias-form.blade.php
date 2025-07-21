@@ -206,15 +206,8 @@
             </div>
         </form>
     </div>
-    <!-- Modal de éxito con Alpine.js -->
-    <x-exito-modal message="" />
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            window.addEventListener('show-success-modal', function () {
-                setTimeout(function () {
-                    window.location.href = "{{ route('noticias') }}";
-                }, 1500); // Espera 1.5 segundos para mostrar el modal
-            });
-        });
-    </script>
+    <!-- Modal de éxito profesional (solo si hay mensaje en sesión) -->
+    @if(session('success_message'))
+        <x-success-modal :message="session('success_message')" />
+    @endif
 </div>

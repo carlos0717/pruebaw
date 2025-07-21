@@ -34,6 +34,11 @@
                 <span class="material-icons mr-2">badge</span> Cargos
                 </a>
             </li>
+            <li>
+                <a href="<?php echo e(route('direcciones.index')); ?>" class="flex items-center px-4 py-2 rounded-lg transition hover:bg-blue-800 <?php echo e(request()->routeIs('direcciones.index') ? 'bg-blue-800 ring-2 ring-blue-400' : ''); ?>">
+                <span class="material-icons mr-2">location_city</span> Direcciones
+                </a>
+            </li>
             </ul>
         </div>
         <?php endif; ?>

@@ -95,7 +95,7 @@ class Estados extends Component
                 'color' => $this->color,
                 'activo' => $this->activo,
             ]);
-            session()->flash('success_message', 'Estado creado correctamente.');
+            $this->dispatch('show-success-modal', message: 'Estado creado correctamente.');
         } else {
             $estado = Estado::findOrFail($this->estadoId);
             $estado->update([
@@ -104,7 +104,7 @@ class Estados extends Component
                 'color' => $this->color,
                 'activo' => $this->activo,
             ]);
-            session()->flash('success_message', 'Estado actualizado correctamente.');
+            $this->dispatch('show-success-modal', message: 'Estado actualizado correctamente.');
         }
         $this->closeModal();
     }
@@ -120,7 +120,7 @@ class Estados extends Component
         $estado = Estado::findOrFail($this->estadoId);
         $estado->delete();
         $this->confirmingDelete = false;
-        session()->flash('success_message', 'Estado eliminado correctamente.');
+        $this->dispatch('show-success-modal', message: 'Estado eliminado correctamente.');
     }
 
     public function updatingSearch()

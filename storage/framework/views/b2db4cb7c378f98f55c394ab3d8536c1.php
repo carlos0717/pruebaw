@@ -41,7 +41,27 @@
         <?php echo e($tipos->links()); ?>
 
     </div>
-    <?php echo $__env->make('livewire.partials.modal-form-tipo', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+</code>    <?php echo $__env->make('livewire.partials.modal-form-tipo', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->make('livewire.partials.confirm-delete-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php if (isset($component)) { $__componentOriginal6475feafa5c7d85d71efc5a48adb5766 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal6475feafa5c7d85d71efc5a48adb5766 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.success-modal','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('success-modal'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal6475feafa5c7d85d71efc5a48adb5766)): ?>
+<?php $attributes = $__attributesOriginal6475feafa5c7d85d71efc5a48adb5766; ?>
+<?php unset($__attributesOriginal6475feafa5c7d85d71efc5a48adb5766); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal6475feafa5c7d85d71efc5a48adb5766)): ?>
+<?php $component = $__componentOriginal6475feafa5c7d85d71efc5a48adb5766; ?>
+<?php unset($__componentOriginal6475feafa5c7d85d71efc5a48adb5766); ?>
+<?php endif; ?>
 </div>
 <?php /**PATH C:\xampp\htdocs\sisogrsu1\resources\views/livewire/institucion-tipos.blade.php ENDPATH**/ ?>

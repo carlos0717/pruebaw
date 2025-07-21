@@ -66,11 +66,11 @@
                 <p class="mb-4">¿Está seguro que desea eliminar este cargo?</p>
                 <div class="flex justify-end gap-2 mt-4">
                     <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
-                    <button wire:click="deleteRole" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    <button type="button" wire:click="deleteRole" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
                 </div>
             </div>
         </div>
     @endif
     <!-- Modal de éxito con Alpine.js -->
-    <x-exito-modal message="" />
+    <x-success-modal message="" />
 </div>

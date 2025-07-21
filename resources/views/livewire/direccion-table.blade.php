@@ -72,5 +72,5 @@
         </div>
     @endif
     <!-- Modal de éxito con Alpine.js -->
-    <x-exito-modal message="Los cambios se han guardado correctamente." />
+    <x-success-modal />
 </div>

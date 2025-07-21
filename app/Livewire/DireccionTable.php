@@ -80,6 +80,7 @@ class DireccionTable extends Component
     {
         Direccion::findOrFail($this->confirmingDeleteId)->delete();
         $this->showDeleteModal = false;
+        $this->dispatch('show-success-modal', message: 'La dirección ha sido eliminada correctamente.');
     }
 
     public function updatingSearch()

@@ -77,16 +77,25 @@ class RoleTable extends Component
         $this->showModal = false;
     }
 
+
     public function confirmDelete($id)
     {
         $this->confirmingDeleteId = $id;
         $this->showDeleteModal = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->showDeleteModal = false;
+        $this->confirmingDeleteId = null;
+    }
+
     public function deleteRole()
     {
         Roles::findOrFail($this->confirmingDeleteId)->delete();
         $this->showDeleteModal = false;
+        $this->confirmingDeleteId = null;
+        $this->dispatch('show-success-modal', message: 'El cargo ha sido eliminado correctamente.');
     }
 
     public function updatingSearch()
