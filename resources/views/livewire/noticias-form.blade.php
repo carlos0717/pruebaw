@@ -17,7 +17,8 @@
     <!-- CDN con CKEditor 5 completo y gratuito -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/ckeditor5-full-free-plugin@23.1.2/build/ckeditor.min.js"></script> -->
     <!-- CKEditor 5 Full Free local -->
-    <script src="{{ asset('ckeditor5-full/build/ckeditor.min.js') }}"></script>
+    <!-- <script src="{{ asset('ckeditor5-full/build/ckeditor.js') }}"></script> -->
+         <script src="{{ asset('ckeditor5-full/build/ckeditor.js') }}?v={{ time() }}"></script>
     
     <script>
         document.addEventListener('livewire:init', async function () {

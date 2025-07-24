@@ -28,6 +28,17 @@ class Instituciones extends Component
         'activo' => 'required|boolean',
     ];
 
+    protected $messages = [
+        'nombre.required' => 'El campo nombre es obligatorio',
+        'nombre.unique' => 'El nombre de la institución ya está registrado',
+        'nombre.max' => 'El nombre no puede superar los 100 caracteres',
+        'institucion_tipo_id.required' => 'Debe seleccionar un tipo de institución',
+        'institucion_tipo_id.exists' => 'El tipo de institución seleccionado no existe',
+        'descripcion.max' => 'La descripción no puede superar los 255 caracteres',
+        'activo.required' => 'El campo activo es obligatorio',
+        'activo.boolean' => 'El campo activo debe ser verdadero o falso',
+    ];
+
     public function render()
     {
         $instituciones = \App\Models\Institucion::with('institucionTipo')
@@ -58,16 +69,13 @@ class Instituciones extends Component
                 $this->institucion_tipo_id = $institucion->institucion_tipo_id;
                 $this->descripcion = $institucion->descripcion;
                 $this->activo = $institucion->activo;
-                $this->rules['nombre'] = 'required|string|max:100|unique:instituciones,nombre,' . $institucion->id;
-                $this->modalOpen = true;
             } else {
                 $this->dispatch('show-success-modal', message: 'No se encontró la institución para editar.');
             }
         } else {
             $this->activo = 1;
-            $this->rules['nombre'] = 'required|string|max:100|unique:instituciones,nombre';
-            $this->modalOpen = true;
         }
+        $this->modalOpen = true;
     }
 
     public function closeModal()
@@ -79,7 +87,14 @@ class Instituciones extends Component
 
     public function save()
     {
-        $this->validate();
+        // Ajustar la regla unique para ignorar el registro actual en edición
+        if ($this->modalMode === 'edit' && $this->institucionId) {
+            $this->rules['nombre'] = 'required|string|max:100|unique:instituciones,nombre,' . $this->institucionId;
+        } else {
+            $this->rules['nombre'] = 'required|string|max:100|unique:instituciones,nombre';
+        }
+        $this->validate($this->rules, $this->messages);
+
         if ($this->modalMode === 'create') {
             $institucion = \App\Models\Institucion::create([
                 'nombre' => $this->nombre,
@@ -95,13 +110,23 @@ class Instituciones extends Component
         } else {
             $institucion = \App\Models\Institucion::find($this->institucionId);
             if ($institucion) {
-                $institucion->update([
-                    'nombre' => $this->nombre,
-                    'institucion_tipo_id' => $this->institucion_tipo_id,
-                    'descripcion' => $this->descripcion,
-                    'activo' => $this->activo,
-                ]);
-                $this->dispatch('show-success-modal', message: 'Institución actualizada correctamente.');
+                // Solo actualizar si hay cambios
+                if (
+                    $institucion->nombre !== $this->nombre ||
+                    $institucion->institucion_tipo_id != $this->institucion_tipo_id ||
+                    $institucion->descripcion !== $this->descripcion ||
+                    $institucion->activo != $this->activo
+                ) {
+                    $institucion->update([
+                        'nombre' => $this->nombre,
+                        'institucion_tipo_id' => $this->institucion_tipo_id,
+                        'descripcion' => $this->descripcion,
+                        'activo' => $this->activo,
+                    ]);
+                    $this->dispatch('show-success-modal', message: 'Institución actualizada correctamente.');
+                } else {
+                    $this->dispatch('show-success-modal', message: 'No se realizaron cambios.');
+                }
             } else {
                 $this->dispatch('show-success-modal', message: 'No se encontró la institución para actualizar.');
             }

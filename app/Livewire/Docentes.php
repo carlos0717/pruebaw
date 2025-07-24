@@ -27,6 +27,20 @@ class Docentes extends Component
         'celular' => 'nullable|string|max:20',
     ];
 
+    protected $messages = [
+        'nombres.required' => 'El campo nombres es obligatorio',
+        'nombres.max' => 'Los nombres no pueden superar los 255 caracteres',
+        'apellidos.required' => 'El campo apellidos es obligatorio',
+        'apellidos.max' => 'Los apellidos no pueden superar los 255 caracteres',
+        'dni.required' => 'El campo DNI es obligatorio',
+        'dni.unique' => 'El DNI ya está registrado',
+        'dni.max' => 'El DNI no puede superar los 15 caracteres',
+        'facultad_id.required' => 'Debe seleccionar una facultad',
+        'facultad_id.exists' => 'La facultad seleccionada no existe',
+        'departamento.max' => 'El departamento no puede superar los 255 caracteres',
+        'celular.max' => 'El celular no puede superar los 20 caracteres',
+    ];
+
     public function render()
     {
         $docentes = Docente::query()
@@ -55,9 +69,6 @@ class Docentes extends Component
             $this->facultad_id = $docente->facultad_id;
             $this->departamento = $docente->departamento;
             $this->celular = $docente->celular;
-            $this->rules['dni'] = 'required|string|max:15|unique:docentes,dni,' . $id;
-        } else {
-            $this->rules['dni'] = 'required|string|max:15|unique:docentes,dni';
         }
         $this->modalOpen = true;
     }
@@ -70,7 +81,14 @@ class Docentes extends Component
 
     public function saveDocente()
     {
-        $this->validate();
+        // Ajustar la regla unique para ignorar el registro actual en edición
+        if ($this->modalMode === 'edit' && $this->docenteId) {
+            $this->rules['dni'] = 'required|string|max:15|unique:docentes,dni,' . $this->docenteId;
+        } else {
+            $this->rules['dni'] = 'required|string|max:15|unique:docentes,dni';
+        }
+        $this->validate($this->rules, $this->messages);
+
         if ($this->modalMode === 'create') {
             Docente::create([
                 'nombres' => $this->nombres,
@@ -83,15 +101,27 @@ class Docentes extends Component
             $this->dispatch('show-success-modal', message: 'El docente ha sido creado correctamente.');
         } else if ($this->modalMode === 'edit' && $this->docenteId) {
             $docente = Docente::findOrFail($this->docenteId);
-            $docente->update([
-                'nombres' => $this->nombres,
-                'apellidos' => $this->apellidos,
-                'dni' => $this->dni,
-                'facultad_id' => $this->facultad_id,
-                'departamento' => $this->departamento,
-                'celular' => $this->celular,
-            ]);
-            $this->dispatch('show-success-modal', message: 'El docente ha sido actualizado correctamente.');
+            // Solo actualizar si hay cambios
+            if (
+                $docente->nombres !== $this->nombres ||
+                $docente->apellidos !== $this->apellidos ||
+                $docente->dni !== $this->dni ||
+                $docente->facultad_id != $this->facultad_id ||
+                $docente->departamento !== $this->departamento ||
+                $docente->celular !== $this->celular
+            ) {
+                $docente->update([
+                    'nombres' => $this->nombres,
+                    'apellidos' => $this->apellidos,
+                    'dni' => $this->dni,
+                    'facultad_id' => $this->facultad_id,
+                    'departamento' => $this->departamento,
+                    'celular' => $this->celular,
+                ]);
+                $this->dispatch('show-success-modal', message: 'El docente ha sido actualizado correctamente.');
+            } else {
+                $this->dispatch('show-success-modal', message: 'No se realizaron cambios.');
+            }
         }
         $this->closeModal();
     }

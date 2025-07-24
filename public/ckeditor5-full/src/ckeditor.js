@@ -57,7 +57,7 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar.js';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation.js';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline.js';
 import WordCount from '@ckeditor/ckeditor5-word-count/src/wordcount.js';
-import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
+//import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/base64uploadadapter';
 
 class Editor extends ClassicEditor {}
 
@@ -68,7 +68,7 @@ Editor.builtinPlugins = [
 	Autolink,
 	BlockQuote,
 	Bold,
-	Base64UploadAdapter,
+	//Base64UploadAdapter,
 	CKFinder,
 	CKFinderUploadAdapter,
 	Code,

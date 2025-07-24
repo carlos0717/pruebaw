@@ -21,6 +21,12 @@ class Facultades extends Component
         'nombre' => 'required|string|max:255|unique:facultades,nombre',
     ];
 
+    protected $messages = [
+        'nombre.required' => 'El campo nombre es obligatorio',
+        'nombre.unique' => 'El nombre de la facultad ya está registrado',
+        'nombre.max' => 'El nombre no puede superar los 255 caracteres',
+    ];
+
     public function render()
     {
         $facultades = FacultadModel::query()
@@ -41,9 +47,6 @@ class Facultades extends Component
             $facultad = FacultadModel::findOrFail($id);
             $this->facultadId = $facultad->id;
             $this->nombre = $facultad->nombre;
-            $this->rules['nombre'] = 'required|string|max:255|unique:facultades,nombre,' . $id;
-        } else {
-            $this->rules['nombre'] = 'required|string|max:255|unique:facultades,nombre';
         }
         $this->modalOpen = true;
     }
@@ -56,7 +59,14 @@ class Facultades extends Component
 
     public function saveFacultad()
     {
-        $this->validate();
+        // Ajustar la regla unique para ignorar el registro actual en edición
+        if ($this->modalMode === 'edit' && $this->facultadId) {
+            $this->rules['nombre'] = 'required|string|max:255|unique:facultades,nombre,' . $this->facultadId;
+        } else {
+            $this->rules['nombre'] = 'required|string|max:255|unique:facultades,nombre';
+        }
+        $this->validate($this->rules, $this->messages);
+
         if ($this->modalMode === 'create') {
             FacultadModel::create([
                 'nombre' => $this->nombre,
@@ -64,10 +74,16 @@ class Facultades extends Component
             $this->dispatch('show-success-modal', message: 'La facultad ha sido creada correctamente.');
         } else if ($this->modalMode === 'edit' && $this->facultadId) {
             $facultad = FacultadModel::findOrFail($this->facultadId);
-            $facultad->update([
-                'nombre' => $this->nombre,
-            ]);
-            $this->dispatch('show-success-modal', message: 'La facultad ha sido actualizada correctamente.');
+            // Solo actualizar si hay cambios
+            if ($facultad->nombre !== $this->nombre) {
+                $facultad->update([
+                    'nombre' => $this->nombre,
+                ]);
+                $this->dispatch('show-success-modal', message: 'La facultad ha sido actualizada correctamente.');
+            } else {
+                // No hay cambios, solo cerrar modal
+                $this->dispatch('show-success-modal', message: 'No se realizaron cambios.');
+            }
         }
         $this->closeModal();
     }
