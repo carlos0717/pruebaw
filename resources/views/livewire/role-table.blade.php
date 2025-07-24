@@ -10,7 +10,7 @@
         <table class="min-w-full w-full table-auto divide-y divide-gray-200">
             <thead class="bg-blue-900 text-white">
                 <tr>
-                    <th class="py-2 px-4 text-center">Nombre</th>
+                    <th class="py-2 px-4 text-center">Cargo</th>
                     <th class="py-2 px-4 text-center">Descripción</th>
                     <th class="py-2 px-4 text-center">Acciones</th>
                 </tr>
@@ -42,13 +42,13 @@
             <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
                 <h2 class="text-lg font-bold mb-4">{{ $isEdit ? 'Editar Cargo' : 'Agregar Cargo' }}</h2>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Nombre</label>
-                    <input type="text" wire:model.defer="nombre" class="w-full border rounded px-3 py-2 mt-1" />
+                    <label class="block text-gray-700">Nombre del Cargo</label>
+                    <input type="text" wire:model.defer="nombre" maxlength="255" class="w-full border rounded px-3 py-2 mt-1 @error('nombre') border-red-500 @enderror" placeholder="Ej: Coordinador" />
                     @error('nombre') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Descripción</label>
-                    <input type="text" wire:model.defer="descripcion" class="w-full border rounded px-3 py-2 mt-1" />
+                    <textarea wire:model.defer="descripcion" maxlength="500" class="w-full border rounded px-3 py-2 mt-1 @error('descripcion') border-red-500 @enderror" placeholder="Descripción del cargo"></textarea>
                     @error('descripcion') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end gap-2 mt-4">
@@ -66,9 +66,11 @@
                 <p class="mb-4">¿Está seguro que desea eliminar este cargo?</p>
                 <div class="flex justify-end gap-2 mt-4">
                     <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
-                    <button wire:click="deleteRole" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    <button type="button" wire:click="deleteRole" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
                 </div>
             </div>
         </div>
     @endif
+    <!-- Modal de éxito con Alpine.js -->
+    <x-success-modal message="" />
 </div>

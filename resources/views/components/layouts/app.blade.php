@@ -7,7 +7,7 @@
     <title>{{ $title ?? 'SISOGRSU' }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    @livewireStyles
+    @livewireStyles  
     @stack('styles')
 </head>
 <body class="min-h-screen flex flex-col bg-gray-100">
@@ -24,14 +24,14 @@
                 </nav>
             </div>
             <div class="flex items-center gap-6">
-                <!-- Notificaciones -->
+                <!-- Notificaciones
                 <button class="relative focus:outline-none">
                     <span class="material-icons text-2xl text-gray-500 hover:text-blue-600 transition">notifications</span>
                     <span class="absolute top-0 right-0 block h-2 w-2 rounded-full ring-2 ring-white bg-red-500"></span>
-                </button>
+                </button> -->
                 <!-- Avatar usuario -->
-                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-600 shadow">
-                    <img src="https://ui-avatars.com/api/?name=Usuario&background=1e40af&color=fff" alt="Avatar usuario" class="object-cover w-full h-full">
+                <div>
+                    @include('components.user-menu')
                 </div>
             </div>
         </div>
@@ -44,6 +44,7 @@
     </div>
     <x-footer />
     @livewireScripts
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('scripts')
 </body>
 </html>

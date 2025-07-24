@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <main class="h-screen w-full bg-[url('/images/unasam_central.webp')] bg-cover bg-center bg-gray-100">
+    <main class="h-screen w-full bg-cover bg-center bg-gray-100" style="background-image: url('{{ asset('images/unasam_central.webp') }}');">
         <a href="/" style="position: absolute; top: 16px; left: 16px; z-index: 1000; text-decoration: none; font-weight: bold; color: #3490dc; font-size: 18px;">&larr; Volver a inicio</a>
         <div class="absolute inset-0 flex flex-col items-center justify-center">
             <h2 class="mt-12 text-4xl font-serif font-bold text-white mb-8 text-center drop-shadow ">Registro de Usuario</h2>

@@ -6,6 +6,7 @@
     <title>@yield('title', 'Página Principal')</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    {{-- Alpine.js se incluye ahora desde el build de Vite --}}
     @livewireStyles
     @stack('styles')
 </head>

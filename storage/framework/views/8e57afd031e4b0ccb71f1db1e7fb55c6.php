@@ -10,7 +10,7 @@
         <table class="min-w-full w-full table-auto divide-y divide-gray-200">
             <thead class="bg-blue-900 text-white">
                 <tr>
-                    <th class="py-2 px-4 text-center">Nombre</th>
+                    <th class="py-2 px-4 text-center">Cargo</th>
                     <th class="py-2 px-4 text-center">Descripción</th>
                     <th class="py-2 px-4 text-center">Acciones</th>
                 </tr>
@@ -42,8 +42,15 @@
             <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
                 <h2 class="text-lg font-bold mb-4"><?php echo e($isEdit ? 'Editar Cargo' : 'Agregar Cargo'); ?></h2>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Nombre</label>
-                    <input type="text" wire:model.defer="nombre" class="w-full border rounded px-3 py-2 mt-1" />
+                    <label class="block text-gray-700">Nombre del Cargo</label>
+                    <input type="text" wire:model.defer="nombre" maxlength="255" class="w-full border rounded px-3 py-2 mt-1 <?php $__errorArgs = ['nombre'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" placeholder="Ej: Coordinador" />
                     <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['nombre'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -55,7 +62,14 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Descripción</label>
-                    <input type="text" wire:model.defer="descripcion" class="w-full border rounded px-3 py-2 mt-1" />
+                    <textarea wire:model.defer="descripcion" maxlength="500" class="w-full border rounded px-3 py-2 mt-1 <?php $__errorArgs = ['descripcion'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> border-red-500 <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" placeholder="Descripción del cargo"></textarea>
                     <!--[if BLOCK]><![endif]--><?php $__errorArgs = ['descripcion'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -80,10 +94,31 @@ unset($__errorArgs, $__bag); ?><!--[if ENDBLOCK]><![endif]-->
                 <p class="mb-4">¿Está seguro que desea eliminar este cargo?</p>
                 <div class="flex justify-end gap-2 mt-4">
                     <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
-                    <button wire:click="deleteRole" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    <button type="button" wire:click="deleteRole" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
                 </div>
             </div>
         </div>
     <?php endif; ?><!--[if ENDBLOCK]><![endif]-->
+    <!-- Modal de éxito con Alpine.js -->
+    <?php if (isset($component)) { $__componentOriginal6475feafa5c7d85d71efc5a48adb5766 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal6475feafa5c7d85d71efc5a48adb5766 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.success-modal','data' => ['message' => '']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component->withName('success-modal'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
+<?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['message' => '']); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal6475feafa5c7d85d71efc5a48adb5766)): ?>
+<?php $attributes = $__attributesOriginal6475feafa5c7d85d71efc5a48adb5766; ?>
+<?php unset($__attributesOriginal6475feafa5c7d85d71efc5a48adb5766); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal6475feafa5c7d85d71efc5a48adb5766)): ?>
+<?php $component = $__componentOriginal6475feafa5c7d85d71efc5a48adb5766; ?>
+<?php unset($__componentOriginal6475feafa5c7d85d71efc5a48adb5766); ?>
+<?php endif; ?>
 </div>
 <?php /**PATH C:\xampp\htdocs\sisogrsu1\resources\views/livewire/role-table.blade.php ENDPATH**/ ?>

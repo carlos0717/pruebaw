@@ -23,7 +23,13 @@
             <div class="grid grid-cols-3 gap-6 mt-8">
                 <x-general-report-card />
                 <x-visitors-card />
-                <x-users-by-age-card />
+                <x-users-by-age-card 
+                    :total="$total" 
+                    :aprobados="$aprobados" 
+                    :en-curso="$enCurso" 
+                    :rechazados="$rechazados" 
+                    :finalizados="$finalizados" 
+                />
             </div>
             <div class="grid grid-cols-3 gap-6 mt-8">
                 <x-official-store-map class="col-span-2" />

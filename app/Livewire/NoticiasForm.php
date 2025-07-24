@@ -56,12 +56,18 @@ class NoticiasForm extends Component
         }
         if ($this->modo === 'create') {
             $noticia = Noticias::create($data);
+            session()->flash('success_message', 'Noticia creada exitosamente.');
+            return redirect()->route('noticias');
         } else {
             $noticia = Noticias::findOrFail($this->noticiaId);
             $noticia->update($data);
+            session()->flash('success_message', 'Noticia actualizada exitosamente.');
+            return redirect()->route('noticias');
         }
-        return redirect()->route('noticias');
+
     }
+
+    // Redirección ahora gestionada por el modal profesional
 
     public function render()
     {

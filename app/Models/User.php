@@ -29,7 +29,12 @@ class User extends Authenticatable
         'email',
         'password',
         'role_id',
+        'direccion_id',
     ];
+    public function direccion()
+    {
+        return $this->belongsTo(Direccion::class, 'direccion_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -74,5 +79,10 @@ class User extends Authenticatable
     public function documentos()
     {
         return $this->hasMany(Documentos::class, 'user_id');
+    }
+
+    public function hasRole($roleName)
+    {
+        return $this->role && $this->role->nombre === $roleName;
     }
 }

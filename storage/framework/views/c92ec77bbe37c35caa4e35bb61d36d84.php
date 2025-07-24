@@ -17,227 +17,215 @@
             </div>
         </section>
 
-        <!-- Sección Nuestro Propósito - Diseño moderno y formal -->
-        <section class="bg-gradient-to-r from-blue-800 to-blue-600 py-12 rounded-2xl shadow-xl mb-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-serif font-bold text-white mb-4">Nuestro Propósito</h2>
-                    <p class="text-xl text-blue-100">Objetivos Generales de la OGRSU</p>
+        <!-- Sección Nuestro Propósito - Diseño moderno, formal e institucional -->
+        <section class="relative py-14 bg-gradient-to-br from-blue-900 via-blue-700 to-green-700 rounded-2xl shadow-2xl mb-12 overflow-hidden">
+            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background: url('/images/pattern.svg') repeat;"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-3 drop-shadow-lg">Nuestro Propósito</h2>
+                <p class="text-lg md:text-xl text-blue-100 font-medium">Compromiso institucional con la responsabilidad social universitaria</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Clima Laboral -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <!-- Icono: Personas colaborando -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20v-2a4 4 0 00-8 0v2M12 12a4 4 0 100-8 4 4 0 000 8zm6 8v-2a4 4 0 00-3-3.87M6 20v-2a4 4 0 013-3.87" />
+                    </svg>
                 </div>
-                
-                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8">
-                    <p class="text-lg text-white mb-6 leading-relaxed">
-                        La OGRSU busca regular la propuesta, diseño, ejecución y evaluación de los programas 
-                        y proyectos de RSU con la participación de toda la comunidad universitaria. 
-                        Sus objetivos principales son:
-                    </p>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <h3 class="text-blue-200 font-semibold mb-3">Clima Laboral</h3>
-                            <p class="text-white text-sm">Contribuir al buen clima laboral para mejorar continuamente los fines educativos y cognitivos</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <h3 class="text-blue-200 font-semibold mb-3">Gobierno Institucional</h3>
-                            <p class="text-white text-sm">Fomentar la ética, transparencia e inclusión para el buen gobierno institucional</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <h3 class="text-blue-200 font-semibold mb-3">Desarrollo Regional</h3>
-                            <p class="text-white text-sm">Posicionar a la UNASAM como actor clave en el desarrollo de Ancash y promotor de transformación social</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <h3 class="text-blue-200 font-semibold mb-3">Campus Sostenible</h3>
-                            <p class="text-white text-sm">Crear un campus sostenible y responsable en todas sus dimensiones</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <h3 class="text-blue-200 font-semibold mb-3">Investigación Comunitaria</h3>
-                            <p class="text-white text-sm">Fomentar la investigación que involucra a la comunidad desde el diseño y ejecución de acciones</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <h3 class="text-blue-200 font-semibold mb-3">Difusión del Conocimiento</h3>
-                            <p class="text-white text-sm">Producir y difundir públicamente los conocimientos generados en la investigación especializada</p>
-                        </div>
-                    </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Clima Laboral</h3>
+                <p class="text-blue-100 text-center text-sm">Promover un ambiente de trabajo colaborativo y saludable para potenciar el desarrollo académico y personal.</p>
+                </div>
+                <!-- Gobierno Institucional -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <!-- Icono: Mano con engranaje (gestión ética) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a2 2 0 012-2h2a2 2 0 012 2v2m-7-6h10m-5-5v5m7 8a2 2 0 01-2 2H7a2 2 0 01-2-2v-5a2 2 0 012-2h10a2 2 0 012 2v5z" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Gobierno Institucional</h3>
+                <p class="text-blue-100 text-center text-sm">Fomentar la ética, la transparencia y la inclusión en la gestión universitaria para un liderazgo responsable.</p>
+                </div>
+                <!-- Desarrollo Regional -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <!-- Icono: Mapa con marcador (desarrollo regional) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A2 2 0 013 15.382V6.618a2 2 0 011.553-1.894l6-1.5a2 2 0 01.894 0l6 1.5A2 2 0 0121 6.618v8.764a2 2 0 01-1.553 1.894L15 20m-6 0V10m6 10V10" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Desarrollo Regional</h3>
+                <p class="text-blue-100 text-center text-sm">Impulsar el desarrollo sostenible de Áncash y fortalecer el rol transformador de la universidad en la sociedad.</p>
+                </div>
+                <!-- Campus Sostenible -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <!-- Icono: Hoja y edificio (sostenibilidad) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 22c4.418 0 8-4.03 8-9 0-4.97-3.582-9-8-9S4 8.03 4 13c0 4.97 3.582 9 8 9zm0 0V13" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Campus Sostenible</h3>
+                <p class="text-blue-100 text-center text-sm">Desarrollar un entorno universitario responsable con el medio ambiente y la sociedad en todas sus dimensiones.</p>
+                </div>
+                <!-- Investigación Comunitaria -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <!-- Icono: Lupa sobre personas (investigación participativa) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A7.972 7.972 0 0017 9a8 8 0 10-8 8 7.972 7.972 0 006.595-3.405L20 22" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Investigación Comunitaria</h3>
+                <p class="text-blue-100 text-center text-sm">Impulsar la investigación participativa que involucre a la comunidad en la generación de soluciones innovadoras.</p>
+                </div>
+                <!-- Difusión del Conocimiento -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <!-- Icono: Libro abierto (difusión de conocimiento) -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-5-9-5-9 5 9 5zm0 0V10" />
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Difusión del Conocimiento</h3>
+                <p class="text-blue-100 text-center text-sm">Garantizar la producción y divulgación pública del conocimiento generado en la universidad.</p>
                 </div>
             </div>
-        </section>
-        
-        
-
-        <!-- Sección Principios y Valores - Diseño moderno -->
-        <section class="bg-gradient-to-r from-green-700 to-green-600 py-12 rounded-2xl shadow-xl mb-8">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-8">
-                    <h2 class="text-3xl font-serif font-bold text-white mb-4">Principios y Valores</h2>
-                    <p class="text-xl text-green-100">Fundamentos éticos de la gestión universitaria</p>
-                </div>
-                
-                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Dignidad</h3>
-                            <p class="text-green-100 text-sm">Construcción de personas autónomas con razón y conciencia</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Libertad</h3>
-                            <p class="text-green-100 text-sm">Respeto de derechos y libertades de la comunidad universitaria</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Democracia</h3>
-                            <p class="text-green-100 text-sm">Participación libre y responsable en la toma de decisiones</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Solidaridad</h3>
-                            <p class="text-green-100 text-sm">Fortalecimiento de la identidad y reconocimiento colectivo</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Equidad</h3>
-                            <p class="text-green-100 text-sm">Igualdad de oportunidades para el desarrollo integral</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Sostenibilidad</h3>
-                            <p class="text-green-100 text-sm">Desarrollo permanente del capital humano e institucional</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Transparencia</h3>
-                            <p class="text-green-100 text-sm">Ejercicio abierto y verificable de las funciones universitarias</p>
-                        </div>
-                        
-                        <div class="bg-white/5 p-6 rounded-lg border border-white/10">
-                            <div class="text-green-300 mb-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-                                </svg>
-                            </div>
-                            <h3 class="text-xl font-semibold text-white mb-2">Ética</h3>
-                            <p class="text-green-100 text-sm">Alineamiento con valores morales y costumbres sociales</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 
-        <!-- Últimas Noticias -->
+        <!-- Sección Principios y Valores - Diseño elegante y formal -->
+        <section class="relative py-14 bg-gradient-to-br from-blue-900 via-blue-700 to-green-700 rounded-2xl shadow-2xl mb-12 overflow-hidden">
+            <div class="absolute inset-0 opacity-10 pointer-events-none" style="background: url('/images/pattern.svg') repeat;"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mb-3 drop-shadow-lg">Principios y Valores</h2>
+                <p class="text-lg md:text-xl text-blue-100 font-medium">Fundamentos éticos que guían la gestión universitaria de la OGRSU</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Dignidad -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Dignidad</h3>
+                <p class="text-blue-100 text-center text-sm">Construcción de personas autónomas con razón y conciencia.</p>
+                </div>
+                <!-- Libertad -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Libertad</h3>
+                <p class="text-blue-100 text-center text-sm">Respeto de derechos y libertades de la comunidad universitaria.</p>
+                </div>
+                <!-- Democracia -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Democracia</h3>
+                <p class="text-blue-100 text-center text-sm">Participación libre y responsable en la toma de decisiones.</p>
+                </div>
+                <!-- Solidaridad -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Solidaridad</h3>
+                <p class="text-blue-100 text-center text-sm">Fortalecimiento de la identidad y reconocimiento colectivo.</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-8">
+                <!-- Equidad -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Equidad</h3>
+                <p class="text-blue-100 text-center text-sm">Igualdad de oportunidades para el desarrollo integral.</p>
+                </div>
+                <!-- Sostenibilidad -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Sostenibilidad</h3>
+                <p class="text-blue-100 text-center text-sm">Desarrollo permanente del capital humano e institucional.</p>
+                </div>
+                <!-- Transparencia -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Transparencia</h3>
+                <p class="text-blue-100 text-center text-sm">Ejercicio abierto y verificable de las funciones universitarias.</p>
+                </div>
+                <!-- Ética -->
+                <div class="bg-white/10 hover:bg-white/20 transition rounded-xl p-7 flex flex-col items-center shadow-lg border border-white/10">
+                <div class="bg-gradient-to-tr from-green-400 to-blue-400 rounded-full p-3 mb-4 shadow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-white mb-2">Ética</h3>
+                <p class="text-blue-100 text-center text-sm">Alineamiento con valores morales y costumbres sociales.</p>
+                </div>
+            </div>
+            </div>
+        </section>
+
+        <!-- Últimas Noticias (Swiper) -->
         <section class="bg-gray-50 py-8 border-t border-b">
             <div class="px-0">
                 <h2 class="font-serif text-2xl font-bold mb-6 text-blue-900">Últimas Noticias</h2>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-lg shadow-md flex flex-col overflow-hidden">
-                        <img src="/img/noticia1.jpg" alt="Noticia 1" class="h-32 w-full object-cover">
-                        <div class="p-4 flex-1 flex flex-col">
-                            <h3 class="font-semibold text-blue-800 text-lg mb-1">Ceremonia de Bienvenida</h3>
-                            <p class="text-sm text-gray-600 flex-1">La universidad dio la bienvenida a los nuevos estudiantes del ciclo 2025-I.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md flex flex-col overflow-hidden">
-                        <img src="/img/noticia2.jpg" alt="Noticia 2" class="h-32 w-full object-cover">
-                        <div class="p-4 flex-1 flex flex-col">
-                            <h3 class="font-semibold text-blue-800 text-lg mb-1">Reconocimiento a Docentes</h3>
-                            <p class="text-sm text-gray-600 flex-1">Se reconoció la labor académica de los docentes destacados en 2024.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md flex flex-col overflow-hidden">
-                        <img src="/img/noticia3.jpg" alt="Noticia 3" class="h-32 w-full object-cover">
-                        <div class="p-4 flex-1 flex flex-col">
-                            <h3 class="font-semibold text-blue-800 text-lg mb-1">Nueva Infraestructura</h3>
-                            <p class="text-sm text-gray-600 flex-1">Inauguración del nuevo pabellón de laboratorios de ingeniería.</p>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-lg shadow-md flex flex-col overflow-hidden">
-                        <img src="/img/noticia4.jpg" alt="Noticia 4" class="h-32 w-full object-cover">
-                        <div class="p-4 flex-1 flex flex-col">
-                            <h3 class="font-semibold text-blue-800 text-lg mb-1">Torneo Deportivo</h3>
-                            <p class="text-sm text-gray-600 flex-1">Torneo interno de fútbol universitario.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+                <div class="swiper noticias-swiper">
+                    <div class="swiper-wrapper">
+                        <?php $__empty_1 = true; $__currentLoopData = $noticias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $noticia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
+                        <div class="swiper-slide h-full">
+                            <div class="bg-white rounded-lg shadow-md flex flex-col overflow-hidden h-full">
+                                <img src="<?php echo e($noticia->imagen_path ? asset('storage/' . $noticia->imagen_path) : '/images/escudo_unasam.png'); ?>" alt="<?php echo e($noticia->titulo); ?>" class="h-40 w-full object-cover bg-gray-100">
+                                <div class="p-4 flex-1 flex flex-col">
+                                    <h3 class="font-bold text-blue-800 text-lg mb-2 line-clamp-2">
+                                        <a href="<?php echo e(route('noticias.show', $noticia->id)); ?>" class="hover:underline hover:text-blue-600 transition-colors duration-150">
+                                            <?php echo e($noticia->titulo); ?>
 
-        <!-- Calendario de Actividades -->
-        <section class="bg-white py-8 border-t">
-            <div class="px-0">
-                <h2 class="font-serif text-2xl font-bold mb-6 text-blue-900">Calendario de Actividades</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-blue-50 rounded-lg shadow flex flex-col">
-                        <div class="p-5 flex-1 flex flex-col">
-                            <h4 class="font-bold mb-2 text-blue-800">Mayo 2025</h4>
-                            <ul class="list-disc pl-6 text-sm text-gray-700 space-y-1">
-                                <li>05 - Conferencia internacional</li>
-                                <li>12 - Torneo de ajedrez</li>
-                                <li>30 - Festival cultural</li>
-                            </ul>
+                                        </a>
+                                    </h3>
+                                    <span class="text-xs text-gray-500 mb-2"><?php echo e($noticia->area_origen); ?> | <?php echo e(\Carbon\Carbon::parse($noticia->fecha_publicacion)->format('d/m/Y H:i')); ?></span>
+                                    <!-- <p class="text-gray-700 text-sm line-clamp-3 mb-4"><?php echo e($noticia->descripcion); ?></p> -->
+                                    <a href="<?php echo e(route('noticias.show', $noticia->id)); ?>" class="mt-auto text-blue-700 hover:underline font-medium text-sm">Leer más</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="bg-blue-50 rounded-lg shadow flex flex-col">
-                        <div class="p-5 flex-1 flex flex-col">
-                            <h4 class="font-bold mb-2 text-blue-800">Junio 2025</h4>
-                            <ul class="list-disc pl-6 text-sm text-gray-700 space-y-1">
-                                <li>03 - Campaña de salud</li>
-                                <li>17 - Seminario de innovación</li>
-                                <li>28 - Clausura del semestre</li>
-                            </ul>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                        <div class="swiper-slide">
+                            <div class="bg-white rounded-lg shadow-md flex flex-col items-center justify-center h-48 text-gray-500">No hay noticias registradas.</div>
                         </div>
+                        <?php endif; ?>
                     </div>
-                    <div class="bg-blue-50 rounded-lg shadow flex flex-col">
-                        <div class="p-5 flex-1 flex flex-col">
-                            <h4 class="font-bold mb-2 text-blue-800">Julio 2025</h4>
-                            <ul class="list-disc pl-6 text-sm text-gray-700 space-y-1">
-                                <li>05 - Examen de admisión</li>
-                                <li>15 - Inicio de ciclo académico</li>
-                                <li>22 - Feria de orientación vocacional</li>
-                            </ul>
-                        </div>
-                    </div>
+                    <div class="swiper-pagination"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
             </div>
-        </section>
+        </section>        
 
         <!-- Nuestras Plataformas Web -->
         <section class="py-8">
@@ -260,20 +248,39 @@
                 </div>
             </div>
         </section>
-
-        <!-- Enlaces de Interés -->
-        <section class="py-8">
-            <h2 class="font-serif text-2xl font-bold mb-6 text-blue-900">Enlaces de Interés</h2>
-            <div class="flex flex-wrap gap-4 justify-center items-center">
-                <img src="/img/enlace1.png" alt="Enlace 1" class="h-8 w-auto grayscale hover:grayscale-0 transition">
-                <img src="/img/enlace2.png" alt="Enlace 2" class="h-8 w-auto grayscale hover:grayscale-0 transition">
-                <img src="/img/enlace3.png" alt="Enlace 3" class="h-8 w-auto grayscale hover:grayscale-0 transition">
-                <img src="/img/enlace4.png" alt="Enlace 4" class="h-8 w-auto grayscale hover:grayscale-0 transition">
-                <img src="/img/enlace5.png" alt="Enlace 5" class="h-8 w-auto grayscale hover:grayscale-0 transition">
-            </div>
-        </section>
+       
     </main>
     <?php echo $__env->make('layouts.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+    
+    <?php $__env->startPush('styles'); ?>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+    <?php $__env->stopPush(); ?>
+    <?php $__env->startPush('scripts'); ?>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                new Swiper('.noticias-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 24,
+                    loop: true,
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints: {
+                        768: { slidesPerView: 2 },
+                        1024: { slidesPerView: 3 },
+                        1280: { slidesPerView: 4 }
+                    }
+                });
+            });
+        </script>
+    <?php $__env->stopPush(); ?>
 <?php $__env->stopSection(); ?>
 
 

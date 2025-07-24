@@ -29,6 +29,18 @@ class Proyectos extends Component
     public $confirmingDelete = false;
     public $proyectoToDelete;
     public $ods_search = '';
+    public $showDetalleModal = false;
+    public $detalleProyecto = null;
+    public function verDetalle($id)
+    {
+        $this->detalleProyecto = ProyectoModel::with(['docenteTutor', 'estudiantes', 'objetivos'])->findOrFail($id);
+        $this->showDetalleModal = true;
+    }
+    public function cerrarDetalleModal()
+    {
+        $this->showDetalleModal = false;
+        $this->detalleProyecto = null;
+    }
 
     protected $rules = [
         'titulo' => 'required|string|max:255',
@@ -114,9 +126,11 @@ class Proyectos extends Component
             ];
             if ($this->modalMode === 'create') {
                 $proyecto = ProyectoModel::create($data);
+                $this->dispatch('show-success-modal', message: 'El proyecto ha sido creado correctamente.');
             } else if ($this->modalMode === 'edit' && $this->proyectoId) {
                 $proyecto = ProyectoModel::findOrFail($this->proyectoId);
                 $proyecto->update($data);
+                $this->dispatch('show-success-modal', message: 'El proyecto ha sido actualizado correctamente.');
             }
             // Guardar estudiantes en tabla pivote (solo IDs)
             $proyecto->estudiantes()->sync($this->equipo_estudiantes);
@@ -137,10 +151,18 @@ class Proyectos extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->proyectoToDelete = null;
+    }
+
     public function deleteProyecto()
     {
         ProyectoModel::destroy($this->proyectoToDelete);
         $this->confirmingDelete = false;
+        $this->proyectoToDelete = null;
+        $this->dispatch('show-success-modal', message: 'El proyecto ha sido eliminado correctamente.');
     }
 
     // Métodos para búsqueda y registro de estudiantes/docentes/ods

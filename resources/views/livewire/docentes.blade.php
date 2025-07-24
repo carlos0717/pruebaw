@@ -56,22 +56,22 @@
                 <h2 class="text-lg font-bold mb-4">{{ $modalMode === 'create' ? 'Nuevo Docente' : 'Editar Docente' }}</h2>
                 <div class="mb-4">
                     <label class="block text-gray-700">Nombres</label>
-                    <input type="text" wire:model.defer="nombres" class="w-full border rounded px-3 py-2 mt-1" />
+                    <input type="text" wire:model.defer="nombres" maxlength="255" pattern="^[\pL\s\-]+$" class="w-full border rounded px-3 py-2 mt-1 @error('nombres') border-red-500 @enderror" placeholder="Ej: Juan Carlos" />
                     @error('nombres') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Apellidos</label>
-                    <input type="text" wire:model.defer="apellidos" class="w-full border rounded px-3 py-2 mt-1" />
+                    <input type="text" wire:model.defer="apellidos" maxlength="255" pattern="^[\pL\s\-]+$" class="w-full border rounded px-3 py-2 mt-1 @error('apellidos') border-red-500 @enderror" placeholder="Ej: Pérez Gómez" />
                     @error('apellidos') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">DNI</label>
-                    <input type="text" wire:model.defer="dni" class="w-full border rounded px-3 py-2 mt-1" />
+                    <input type="text" wire:model.defer="dni" maxlength="8" pattern="\d{8}" class="w-full border rounded px-3 py-2 mt-1 @error('dni') border-red-500 @enderror" placeholder="Ej: 12345678" />
                     @error('dni') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Facultad</label>
-                    <select wire:model.defer="facultad_id" class="w-full border rounded px-3 py-2 mt-1">
+                    <select wire:model.defer="facultad_id" class="w-full border rounded px-3 py-2 mt-1 @error('facultad_id') border-red-500 @enderror">
                         <option value="">Seleccione una facultad</option>
                         @foreach($facultades as $facultad)
                             <option value="{{ $facultad->id }}">{{ $facultad->nombre }}</option>
@@ -81,12 +81,12 @@
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Departamento</label>
-                    <input type="text" wire:model.defer="departamento" class="w-full border rounded px-3 py-2 mt-1" />
+                    <input type="text" wire:model.defer="departamento" maxlength="255" class="w-full border rounded px-3 py-2 mt-1 @error('departamento') border-red-500 @enderror" placeholder="Ej: Ciencias Básicas" />
                     @error('departamento') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700">Celular</label>
-                    <input type="text" wire:model.defer="celular" class="w-full border rounded px-3 py-2 mt-1" />
+                    <input type="text" wire:model.defer="celular" maxlength="15" pattern="\d{9,15}" class="w-full border rounded px-3 py-2 mt-1 @error('celular') border-red-500 @enderror" placeholder="Ej: 987654321" />
                     @error('celular') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end gap-2 mt-4">
@@ -104,10 +104,13 @@
                 <h2 class="text-lg font-bold mb-4">Eliminar Docente</h2>
                 <p class="mb-4">¿Está seguro que desea eliminar este docente?</p>
                 <div class="flex justify-end gap-2 mt-4">
-                    <button type="button" wire:click="$set('confirmingDelete', false)" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
-                    <button wire:click="deleteDocente" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
+                    <button type="button" wire:click="deleteDocente" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
                 </div>
             </div>
         </div>
     @endif
+
+    <!-- Modal de éxito profesional -->
+    <x-success-modal message="Los cambios se han guardado correctamente." />
 </div>

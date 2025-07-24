@@ -61,10 +61,14 @@
                             <h2 class="text-lg font-bold mb-4">Eliminar Noticia</h2>
                             <p class="mb-4">¿Está seguro que desea eliminar esta noticia?</p>
                             <div class="flex justify-end gap-2 mt-4">
-                                <button wire:click="$set('confirmingDelete', false)" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
-                                <button wire:click="deleteNoticia" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                                <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
+                                <button type="button" wire:click="deleteNoticia" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
                             </div>
                         </div>
                     </div>
                 @endif
- </div>
+    <!-- Modal de éxito profesional global -->
+    @if(session('success_message'))
+        <x-success-modal :message="session('success_message')" />
+    @endif
+</div>

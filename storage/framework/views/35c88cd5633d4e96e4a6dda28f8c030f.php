@@ -6,6 +6,7 @@
     <title><?php echo $__env->yieldContent('title', 'Página Principal'); ?></title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
 
     <?php echo $__env->yieldPushContent('styles'); ?>

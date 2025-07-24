@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('categoria_id')->comment('Ej: Normativa, Resolución, Requisito, Convenio Escaneado.');
             $table->unsignedBigInteger('user_id')->comment('Usuario que cargó el documento.');
             $table->timestamps();
-
+            
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('categoria_id')->references('id')->on('categorias_documentos');
         });

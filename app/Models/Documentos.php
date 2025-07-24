@@ -18,6 +18,7 @@ class Documentos extends Model
         'tamano_mb',
         'categoria_id',
         'user_id',
+        'area_origen', // Nuevo campo para identificar la dirección
     ];
 
     public function categoria()

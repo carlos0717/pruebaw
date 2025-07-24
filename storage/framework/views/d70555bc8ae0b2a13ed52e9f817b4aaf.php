@@ -77,14 +77,14 @@
 <?php endif; ?>
                 <?php if (isset($component)) { $__componentOriginal54c5ea4449c35739f8f9084ffd4a542a = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal54c5ea4449c35739f8f9084ffd4a542a = $attributes; } ?>
-<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.users-by-age-card','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.users-by-age-card','data' => ['total' => $total,'aprobados' => $aprobados,'enCurso' => $enCurso,'rechazados' => $rechazados,'finalizados' => $finalizados]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? (array) $attributes->getIterator() : [])); ?>
 <?php $component->withName('users-by-age-card'); ?>
 <?php if ($component->shouldRender()): ?>
 <?php $__env->startComponent($component->resolveView(), $component->data()); ?>
 <?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag && $constructor = (new ReflectionClass(Illuminate\View\AnonymousComponent::class))->getConstructor()): ?>
 <?php $attributes = $attributes->except(collect($constructor->getParameters())->map->getName()->all()); ?>
 <?php endif; ?>
-<?php $component->withAttributes([]); ?>
+<?php $component->withAttributes(['total' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($total),'aprobados' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($aprobados),'en-curso' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($enCurso),'rechazados' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($rechazados),'finalizados' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($finalizados)]); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php endif; ?>
 <?php if (isset($__attributesOriginal54c5ea4449c35739f8f9084ffd4a542a)): ?>

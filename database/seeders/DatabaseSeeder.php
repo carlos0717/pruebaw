@@ -30,16 +30,27 @@ class DatabaseSeeder extends Seeder
             ['nombre' => 'Administrador', 'descripcion' => 'Administrador del sistema'],
             ['nombre' => 'Encargado de RSU', 'descripcion' => 'Encargado de Responsabilidad Social Universitaria'],
             ['nombre' => 'Encargado de PS', 'descripcion' => 'Encargado de Proyección Social'],
-            ['nombre' => 'Encargado de SEC', 'descripcion' => 'Encargado de Seguimiento al Egresado'],
+            ['nombre' => 'Encargado de SCE', 'descripcion' => 'Encargado de Seguimiento al Egresado'],
             ['nombre' => 'Encargado de EU', 'descripcion' => 'Encargado de Extensión Universitaria'],
         ];
         $roleIds = [];
         foreach ($roles as $rol) {
             $role = \App\Models\Roles::firstOrCreate(['nombre' => $rol['nombre']], $rol);
             $roleIds[$rol['nombre']] = $role->id;
-        }
+        }        
 
-        // Verificar y crear usuario administrador
+        //llamar al seeder de Direcciones
+        $this->call(\Database\Seeders\DireccionesSeeder::class);
+
+        // Obtener IDs de direcciones por nombre
+        $direcciones = [
+            'Responsabilidad Social' => \App\Models\Direccion::where('nombre', 'Responsabilidad Social')->value('id'),
+            'Proyeccion Social' => \App\Models\Direccion::where('nombre', 'Proyeccion Social')->value('id'),
+            'Seguimiento y Certificacion al Egresado' => \App\Models\Direccion::where('nombre', 'Seguimiento y Certificacion al Egresado')->value('id'),
+            'Extension Universitaria' => \App\Models\Direccion::where('nombre', 'Extension Universitaria')->value('id'),
+        ];        
+
+        // Verificar y crear usuario administrador (sin dirección)
         if (!User::where('email', 'admin@example.com')->exists()) {
             User::create([
                 'nombres' => 'Admin',
@@ -47,32 +58,61 @@ class DatabaseSeeder extends Seeder
                 'email' => 'admin@example.com',
                 'password' => Hash::make('12345'),
                 'role_id' => $roleIds['Administrador'],
+                'direccion_id' => null,
             ]);
             $this->command->info('Usuario administrador creado exitosamente.');
         }
 
-        // Verificar y crear usuario regular 1
-        if (!User::where('email', 'user1@example.com')->exists()) {
+        // Verificar y crear usuario para Encargado de RSU
+        if (!User::where('email', 'rsu@example.com')->exists()) {
             User::create([
                 'nombres' => 'Usuario',
-                'apellidos' => 'Regular1',
-                'email' => 'user1@example.com',
+                'apellidos' => 'RSU',
+                'email' => 'rsu@example.com',
                 'password' => Hash::make('12345'),
                 'role_id' => $roleIds['Encargado de RSU'],
+                'direccion_id' => $direcciones['Responsabilidad Social'],
             ]);
-            $this->command->info('Usuario regular 1 creado exitosamente.');
+            $this->command->info('Usuario Encargado de RSU creado exitosamente.');
         }
 
-        // Verificar y crear usuario regular 2
-        if (!User::where('email', 'user2@example.com')->exists()) {
+        // Verificar y crear usuario para Encargado de PS
+        if (!User::where('email', 'ps@example.com')->exists()) {
             User::create([
                 'nombres' => 'Usuario',
-                'apellidos' => 'Regular2',
-                'email' => 'user2@example.com',
+                'apellidos' => 'PS',
+                'email' => 'ps@example.com',
                 'password' => Hash::make('12345'),
                 'role_id' => $roleIds['Encargado de PS'],
+                'direccion_id' => $direcciones['Proyeccion Social'],
             ]);
-            $this->command->info('Usuario regular 2 creado exitosamente.');
+            $this->command->info('Usuario Encargado de PS creado exitosamente.');
+        }
+
+        // Verificar y crear usuario para Encargado de SCE
+        if (!User::where('email', 'sec@example.com')->exists()) {
+            User::create([
+                'nombres' => 'Usuario',
+                'apellidos' => 'SCE',
+                'email' => 'sce@example.com',
+                'password' => Hash::make('12345'),
+                'role_id' => $roleIds['Encargado de SCE'],
+                'direccion_id' => $direcciones['Seguimiento y Certificacion al Egresado'],
+            ]);
+            $this->command->info('Usuario Encargado de SCE creado exitosamente.');
+        }
+
+        // Verificar y crear usuario para Encargado de EU
+        if (!User::where('email', 'eu@example.com')->exists()) {
+            User::create([
+                'nombres' => 'Usuario',
+                'apellidos' => 'EU',
+                'email' => 'eu@example.com',
+                'password' => Hash::make('12345'),
+                'role_id' => $roleIds['Encargado de EU'],
+                'direccion_id' => $direcciones['Extension Universitaria'],
+            ]);
+            $this->command->info('Usuario Encargado de EU creado exitosamente.');
         }
         
         //llamar al seeder de Objetivos de Desarrollo Sostenible
@@ -85,5 +125,10 @@ class DatabaseSeeder extends Seeder
         $this->call(DocentesSeeder::class);
         //llamar al seeder de CategoriaDocumento
         $this->call(CategoriaDocumentoSeeder::class);
+        // Seeders para tablas solicitadas
+        $this->call(\Database\Seeders\InstitucionTiposSeeder::class);
+        $this->call(\Database\Seeders\EstadosSeeder::class);
+        $this->call(\Database\Seeders\InstitucionesSeeder::class);
+        
     }
 }

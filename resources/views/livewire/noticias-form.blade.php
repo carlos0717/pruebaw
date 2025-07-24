@@ -15,7 +15,10 @@
 
 @push('scripts')
     <!-- CDN con CKEditor 5 completo y gratuito -->
-    <script src="https://cdn.jsdelivr.net/npm/ckeditor5-full-free-plugin@23.1.2/build/ckeditor.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/ckeditor5-full-free-plugin@23.1.2/build/ckeditor.min.js"></script> -->
+    <!-- CKEditor 5 Full Free local -->
+    <!-- <script src="{{ asset('ckeditor5-full/build/ckeditor.js') }}"></script> -->
+         <script src="{{ asset('ckeditor5-full/build/ckeditor.js') }}?v={{ time() }}"></script>
     
     <script>
         document.addEventListener('livewire:init', async function () {
@@ -155,12 +158,12 @@
         <form wire:submit.prevent="save" class="space-y-8">
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Título</label>
-                <input type="text" wire:model.defer="titulo" class="w-full border border-gray-300 rounded px-4 py-2 mt-1 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg" />
+                <input type="text" wire:model.defer="titulo" maxlength="255" class="w-full border border-gray-300 rounded px-4 py-2 mt-1 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg @error('titulo') border-red-500 @enderror" placeholder="Ej: Campaña de Salud" />
                 @error('titulo') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Miniatura (JPG, PNG, WEBP, máx. 5MB)</label>
-                <input type="file" wire:model="imagen_upload" accept="image/jpeg,image/png,image/webp" class="w-full border border-gray-300 rounded px-4 py-2 mt-1 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg" />
+                <input type="file" wire:model="imagen_upload" accept="image/jpeg,image/png,image/webp" class="w-full border border-gray-300 rounded px-4 py-2 mt-1 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg @error('imagen_upload') border-red-500 @enderror" />
                 @php
                     $hasImagenUpload = isset($imagen_upload) || (property_exists($this, 'imagen_upload') && $imagen_upload);
                     $hasImagenPath = isset($imagen_path) || (property_exists($this, 'imagen_path') && $imagen_path);
@@ -182,14 +185,14 @@
                 <label class="block text-gray-700 font-semibold mb-1">Contenido</label>
                 <div id="editor-container">
                     <textarea name="content" id="content" cols="30" rows="10" 
-                              wire:model.defer="descripcion" class="form-control" 
+                              wire:model.defer="descripcion" maxlength="5000" class="form-control @error('descripcion') border-red-500 @enderror" 
                               placeholder="Escribe su contenido">{{ $descripcion }}</textarea>
                 </div>
                 @error('descripcion') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
             </div>
             <div>
                 <label class="block text-gray-700 font-semibold mb-1">Área de Origen</label>
-                <select wire:model.defer="area_origen" class="w-full border border-gray-300 rounded px-4 py-2 mt-1 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg">
+                <select wire:model.defer="area_origen" class="w-full border border-gray-300 rounded px-4 py-2 mt-1 focus:ring-2 focus:ring-blue-400 focus:outline-none text-lg @error('area_origen') border-red-500 @enderror">
                     <option value="">Seleccione...</option>
                     <option value="RSU">RSU</option>
                     <option value="Seguimiento al Egresado">Seguimiento al Egresado</option>
@@ -203,5 +206,9 @@
                 <button type="submit" class="bg-blue-600 text-white px-8 py-2 rounded text-lg hover:bg-blue-700">{{ $modo === 'create' ? 'Crear' : 'Actualizar' }}</button>
             </div>
         </form>
-    </div>   
+    </div>
+    <!-- Modal de éxito profesional (solo si hay mensaje en sesión) -->
+    @if(session('success_message'))
+        <x-success-modal :message="session('success_message')" />
+    @endif
 </div>

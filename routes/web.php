@@ -1,3 +1,4 @@
+
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -13,6 +14,14 @@ use App\Models\Noticias as NoticiaModel;
 use App\Http\Controllers\NoticiasUploadController;
 use App\Livewire\Documentos;
 use App\Http\Controllers\ResponsabilidadSocialController;
+
+use App\Livewire\InstitucionTipos;
+use App\Livewire\Instituciones;
+use App\Livewire\Convenios;
+use App\Livewire\Estados;
+
+//controlador noticia imagenes
+use App\Http\Controllers\CkeditorImageUploadController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,9 +33,8 @@ use App\Http\Controllers\ResponsabilidadSocialController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+use App\Http\Controllers\HomeController;
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware([
     'auth:sanctum',
@@ -38,12 +46,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
-// Rutas para nuevas oficinas y vistas
-// Mejorado: Se añade protección con middleware 'auth' para evitar acceso no autorizado (control de acceso defectuoso)
-Route::view('/proyeccion-social', 'proyeccion-social')->name('proyeccion.social');
-Route::view('/seguimiento-egresado', 'seguimiento-egresado')->name('seguimiento.egresado');
-Route::view('/extension-universitaria', 'extension-universitaria')->name('extension.universitaria');
-
+// Rutas para nuevas oficinas y vistas con controladores para mostrar noticias y documentos
+Route::get('/proyeccion-social', [\App\Http\Controllers\ProyeccionSocialController::class, 'index'])->name('proyeccion.social');
+Route::get('/seguimiento-egresado', [\App\Http\Controllers\SeguimientoEgresadoController::class, 'index'])->name('seguimiento.egresado');
+Route::get('/extension-universitaria', [\App\Http\Controllers\ExtensionUniversitariaController::class, 'index'])->name('extension.universitaria');
 
 // Vista informativa de Responsabilidad Social
 // Route::get('/responsabilidad-social', function () {
@@ -53,49 +59,63 @@ Route::get('/responsabilidad-social', [ResponsabilidadSocialController::class, '
     ->name('responsabilidad.social');
 
 // vista del dashboard
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/overview-1', [DashboardController::class, 'overview1'])->name('overview1');
-    Route::get('/overview-2', [DashboardController::class, 'overview2'])->name('overview2');
 });
 // Temporal: para pruebas con vistas de ejemplo
 // Mejorado: Se añade protección con middleware 'auth' para evitar acceso no autorizado a vistas administrativas
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::view('/users', 'dashboard.users')->name('users.index');
     Route::view('/roles', 'dashboard.roles')->name('roles.index');
+    Route::view('/direcciones', 'dashboard.direcciones')->name('direcciones.index');
 });
 
-Route::get('/objetivos-desarrollo-sostenible', ObjetivosDesarrolloSostenible::class)
-    ->name('objetivos-desarrollo-sostenible');
-
-Route::get('/facultades', Facultades::class)
-    ->name('facultades');
-
-Route::get('/estudiantes', Estudiantes::class)
-    ->name('estudiantes');
-
-Route::get('/docentes', Docentes::class)
-    ->name('docentes');
-
-Route::get('/proyectos', Proyectos::class)
-    ->name('proyectos');
-
 // Rutas individuales para cada sección de Noticias y Documentos (para el menú lateral)
-// Gestión Responsabilidad Social
-Route::get('/noticias', Noticias::class)->name('noticias');
-Route::get('/documentos', Documentos::class)->name('documentos');
 
-// Seguimiento y Certificación al Egresado
-Route::get('/noticias-egresado', Noticias::class)->name('noticias.egresado');
-Route::get('/documentos-egresado', Documentos::class)->name('documentos.egresado');
+// Gestión Responsabilidad Social
+Route::middleware(['role:Administrador,Encargado de RSU'])->group(function () {
+    Route::get('/objetivos-desarrollo-sostenible', ObjetivosDesarrolloSostenible::class)->name('objetivos-desarrollo-sostenible');
+    Route::get('/facultades', Facultades::class)->name('facultades');
+    Route::get('/estudiantes', Estudiantes::class)->name('estudiantes');
+    Route::get('/docentes', Docentes::class)->name('docentes');
+    Route::get('/proyectos', Proyectos::class)->name('proyectos');
+    Route::get('/noticias', Noticias::class)->name('noticias');
+    Route::get('/documentos', Documentos::class)->name('documentos');
+});
+
+// Ruta para la tarjeta estadística de proyectos por estado
+Route::middleware(['role:Administrador,Encargado de RSU'])->group(function () {
+    Route::get('/proyectos/estadistica', [\App\Http\Controllers\ProyectosEstadisticaController::class, 'proyectosPorEstado'])->name('proyectos.estadistica');
+});
+
+// Gestión Seguimiento y Certificación al Egresado
+Route::middleware(['role:Administrador,Encargado de SCE'])->group(function () {
+    Route::get('/noticias-egresado', Noticias::class)->name('noticias.egresado');
+    Route::get('/documentos-egresado', Documentos::class)->name('documentos.egresado');
+});
 
 // Gestión Proyección Social
-Route::get('/noticias-gestion', Noticias::class)->name('noticias.gestion');
-Route::get('/documentos-gestion', Documentos::class)->name('documentos.gestion');
+Route::middleware(['role:Administrador,Encargado de PS'])->group(function () {
+    // Gestión de Estados
+    Route::get('/estados-gestion', Estados::class)->name('estados.gestion');
+    // Gestión de Tipos de Institución
+    Route::get('/institucion-tipos-gestion', InstitucionTipos::class)->name('institucion-tipos.gestion');
+    // Gestión de Instituciones
+    Route::get('/instituciones-gestion', Instituciones::class)->name('instituciones.gestion');
+    // Gestión de Convenios
+    Route::get('/convenios-gestion', Convenios::class)->name('convenios.gestion');
+
+    Route::get('/noticias-gestion', Noticias::class)->name('noticias.gestion');
+    Route::get('/documentos-gestion', Documentos::class)->name('documentos.gestion');
+});
 
 // Extensión Universitaria
-Route::get('/noticias-extension', Noticias::class)->name('noticias.extension');
-Route::get('/documentos-extension', Documentos::class)->name('documentos.extension');
+Route::middleware(['role:Administrador,Encargado de EU'])->group(function () {
+    Route::get('/noticias-extension', Noticias::class)->name('noticias.extension');
+    Route::get('/documentos-extension', Documentos::class)->name('documentos.extension');
+});
+
+// Rutas para crear, editar y mostrar noticias
 Route::get('/noticias/create', function () {
     return view('noticias.form', ['modo' => 'create']);
 })->name('noticias.create');
@@ -107,11 +127,19 @@ Route::get('/noticias/{id}', function($id) {
     if (!is_numeric($id) || intval($id) != $id) {
         abort(404); // Si el id no es un entero válido, retorna 404
     }
-    $noticia = NoticiaModel::findOrFail($id);
-    return view('livewire.noticia-show', compact('noticia'));
+    return app(\App\Http\Controllers\NoticiaController::class)->show($id);
 })->name('noticias.show');
-Route::post('/noticias/upload', [NoticiasUploadController::class, 'upload'])->name('noticias.upload');
-require __DIR__.'/ckeditor_upload.php';
+
+/* Route::post('/noticias/upload', [NoticiasUploadController::class, 'upload'])->name('noticias.upload');
+require __DIR__.'/ckeditor_upload.php'; */
+Route::post('/ckeditor/upload', [CkeditorImageUploadController::class, 'upload'])
+     ->middleware(['auth', 'verified']) // ¡Importante! Protege la ruta
+     ->name('ckeditor.upload');
 
 Route::get('/documentos', Documentos::class)
 ->name('documentos');
+
+
+// Ruta de la clase que controla el formulario de contacto de RSU
+Route::post('/contacto-rsu', [ResponsabilidadSocialController::class, 'contactoRSU'])
+    ->name('contacto.rsu');

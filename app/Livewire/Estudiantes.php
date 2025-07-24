@@ -27,6 +27,22 @@ class Estudiantes extends Component
         'facultad_id' => 'required|exists:facultades,id',
     ];
 
+    protected $messages = [
+        'nombres.required' => 'El campo nombres es obligatorio',
+        'nombres.max' => 'Los nombres no pueden superar los 255 caracteres',
+        'apellidos.required' => 'El campo apellidos es obligatorio',
+        'apellidos.max' => 'Los apellidos no pueden superar los 255 caracteres',
+        'codigo_universidad.required' => 'El código de universidad es obligatorio',
+        'codigo_universidad.unique' => 'El código de universidad ya está registrado',
+        'codigo_universidad.max' => 'El código de universidad no puede superar los 20 caracteres',
+        'dni.required' => 'El campo DNI es obligatorio',
+        'dni.unique' => 'El DNI ya está registrado',
+        'dni.max' => 'El DNI no puede superar los 15 caracteres',
+        'celular.max' => 'El celular no puede superar los 20 caracteres',
+        'facultad_id.required' => 'Debe seleccionar una facultad',
+        'facultad_id.exists' => 'La facultad seleccionada no existe',
+    ];
+
     public function render()
     {
         $estudiantes = EstudianteModel::query()
@@ -60,11 +76,6 @@ class Estudiantes extends Component
             $this->dni = $estudiante->dni;
             $this->celular = $estudiante->celular;
             $this->facultad_id = $estudiante->facultad_id;
-            $this->rules['codigo_universidad'] = 'required|string|max:20|unique:estudiantes,codigo_universidad,' . $id;
-            $this->rules['dni'] = 'required|string|max:15|unique:estudiantes,dni,' . $id;
-        } else {
-            $this->rules['codigo_universidad'] = 'required|string|max:20|unique:estudiantes,codigo_universidad';
-            $this->rules['dni'] = 'required|string|max:15|unique:estudiantes,dni';
         }
         $this->modalOpen = true;
     }
@@ -77,7 +88,16 @@ class Estudiantes extends Component
 
     public function saveEstudiante()
     {
-        $this->validate();
+        // Ajustar la regla unique para ignorar el registro actual en edición
+        if ($this->modalMode === 'edit' && $this->estudianteId) {
+            $this->rules['codigo_universidad'] = 'required|string|max:20|unique:estudiantes,codigo_universidad,' . $this->estudianteId;
+            $this->rules['dni'] = 'required|string|max:15|unique:estudiantes,dni,' . $this->estudianteId;
+        } else {
+            $this->rules['codigo_universidad'] = 'required|string|max:20|unique:estudiantes,codigo_universidad';
+            $this->rules['dni'] = 'required|string|max:15|unique:estudiantes,dni';
+        }
+        $this->validate($this->rules, $this->messages);
+
         if ($this->modalMode === 'create') {
             EstudianteModel::create([
                 'nombres' => $this->nombres,
@@ -87,16 +107,30 @@ class Estudiantes extends Component
                 'celular' => $this->celular,
                 'facultad_id' => $this->facultad_id,
             ]);
+            $this->dispatch('show-success-modal', message: 'El estudiante ha sido creado correctamente.');
         } else if ($this->modalMode === 'edit' && $this->estudianteId) {
             $estudiante = EstudianteModel::findOrFail($this->estudianteId);
-            $estudiante->update([
-                'nombres' => $this->nombres,
-                'apellidos' => $this->apellidos,
-                'codigo_universidad' => $this->codigo_universidad,
-                'dni' => $this->dni,
-                'celular' => $this->celular,
-                'facultad_id' => $this->facultad_id,
-            ]);
+            // Solo actualizar si hay cambios
+            if (
+                $estudiante->nombres !== $this->nombres ||
+                $estudiante->apellidos !== $this->apellidos ||
+                $estudiante->codigo_universidad !== $this->codigo_universidad ||
+                $estudiante->dni !== $this->dni ||
+                $estudiante->celular !== $this->celular ||
+                $estudiante->facultad_id != $this->facultad_id
+            ) {
+                $estudiante->update([
+                    'nombres' => $this->nombres,
+                    'apellidos' => $this->apellidos,
+                    'codigo_universidad' => $this->codigo_universidad,
+                    'dni' => $this->dni,
+                    'celular' => $this->celular,
+                    'facultad_id' => $this->facultad_id,
+                ]);
+                $this->dispatch('show-success-modal', message: 'El estudiante ha sido actualizado correctamente.');
+            } else {
+                $this->dispatch('show-success-modal', message: 'No se realizaron cambios.');
+            }
         }
         $this->closeModal();
     }
@@ -107,10 +141,18 @@ class Estudiantes extends Component
         $this->confirmingDelete = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->confirmingDelete = false;
+        $this->estudianteToDelete = null;
+    }
+
     public function deleteEstudiante()
     {
         EstudianteModel::destroy($this->estudianteToDelete);
         $this->confirmingDelete = false;
+        $this->estudianteToDelete = null;
+        $this->dispatch('show-success-modal', message: 'El estudiante ha sido eliminado correctamente.');
     }
 
     

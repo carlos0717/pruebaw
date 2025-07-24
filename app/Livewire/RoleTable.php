@@ -66,14 +66,17 @@ class RoleTable extends Component
                 'nombre' => $this->nombre,
                 'descripcion' => $this->descripcion,
             ]);
+            $this->dispatch('show-success-modal', message: 'El cargo ha sido actualizado correctamente.');
         } else {
             Roles::create([
                 'nombre' => $this->nombre,
                 'descripcion' => $this->descripcion,
             ]);
+            $this->dispatch('show-success-modal', message: 'El cargo ha sido creado correctamente.');
         }
         $this->showModal = false;
     }
+
 
     public function confirmDelete($id)
     {
@@ -81,10 +84,18 @@ class RoleTable extends Component
         $this->showDeleteModal = true;
     }
 
+    public function closeDeleteModal()
+    {
+        $this->showDeleteModal = false;
+        $this->confirmingDeleteId = null;
+    }
+
     public function deleteRole()
     {
         Roles::findOrFail($this->confirmingDeleteId)->delete();
         $this->showDeleteModal = false;
+        $this->confirmingDeleteId = null;
+        $this->dispatch('show-success-modal', message: 'El cargo ha sido eliminado correctamente.');
     }
 
     public function updatingSearch()

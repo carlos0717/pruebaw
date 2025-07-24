@@ -35,7 +35,8 @@ class NoticiaController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $noticia = \App\Models\Noticias::with('user')->findOrFail($id);
+        return view('template', compact('noticia'));
     }
 
     /**

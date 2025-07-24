@@ -7,8 +7,7 @@
     <title><?php echo e($title ?? 'SISOGRSU'); ?></title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>
-
+    <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::styles(); ?>  
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body class="min-h-screen flex flex-col bg-gray-100">
@@ -25,14 +24,14 @@
                 </nav>
             </div>
             <div class="flex items-center gap-6">
-                <!-- Notificaciones -->
+                <!-- Notificaciones
                 <button class="relative focus:outline-none">
                     <span class="material-icons text-2xl text-gray-500 hover:text-blue-600 transition">notifications</span>
                     <span class="absolute top-0 right-0 block h-2 w-2 rounded-full ring-2 ring-white bg-red-500"></span>
-                </button>
+                </button> -->
                 <!-- Avatar usuario -->
-                <div class="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-600 shadow">
-                    <img src="https://ui-avatars.com/api/?name=Usuario&background=1e40af&color=fff" alt="Avatar usuario" class="object-cover w-full h-full">
+                <div>
+                    <?php echo $__env->make('components.user-menu', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                 </div>
             </div>
         </div>
@@ -85,6 +84,7 @@
 <?php endif; ?>
     <?php echo \Livewire\Mechanisms\FrontendAssets\FrontendAssets::scripts(); ?>
 
+    <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css', 'resources/js/app.js']); ?>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html><?php /**PATH C:\xampp\htdocs\sisogrsu1\resources\views/components/layouts/app.blade.php ENDPATH**/ ?>

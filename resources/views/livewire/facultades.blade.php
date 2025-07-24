@@ -44,8 +44,8 @@
             <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6">
                 <h2 class="text-lg font-bold mb-4">{{ $modalMode === 'create' ? 'Nueva Facultad' : 'Editar Facultad' }}</h2>
                 <div class="mb-4">
-                    <label class="block text-gray-700">Nombre</label>
-                    <input type="text" wire:model.defer="nombre" class="w-full border rounded px-3 py-2 mt-1" />
+                    <label class="block text-gray-700">Nombre de la Facultad</label>
+                    <input type="text" wire:model.defer="nombre" maxlength="255" class="w-full border rounded px-3 py-2 mt-1 @error('nombre') border-red-500 @enderror" placeholder="Ej: Facultad de Ingeniería" />
                     @error('nombre') <span class="text-red-500 text-xs">{{ $message }}</span> @enderror
                 </div>
                 <div class="flex justify-end gap-2 mt-4">
@@ -62,10 +62,12 @@
                 <h2 class="text-lg font-bold mb-4">Eliminar Facultad</h2>
                 <p class="mb-4">¿Está seguro que desea eliminar esta facultad?</p>
                 <div class="flex justify-end gap-2 mt-4">
-                    <button type="button" wire:click="$set('confirmingDelete', false)" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
-                    <button wire:click="deleteFacultad" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
+                    <button type="button" wire:click="closeDeleteModal" class="bg-gray-300 px-4 py-2 rounded">Cancelar</button>
+                    <button type="button" wire:click="deleteFacultad" class="bg-red-600 text-white px-4 py-2 rounded">Eliminar</button>
                 </div>
             </div>
         </div>
     @endif
+    <!-- Modal de éxito profesional -->
+    <x-success-modal message="Los cambios se han guardado correctamente." />
 </div>
